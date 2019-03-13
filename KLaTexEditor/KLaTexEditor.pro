@@ -29,10 +29,12 @@ QMAKE_CXXFLAGS += -std=c++11
 
 SOURCES += \
         main.cpp \
-    kmainwindow.cpp
+    kmainwindow.cpp \
+    kmainwidget.cpp
 
 HEADERS += \
-    kmainwindow.h
+    kmainwindow.h \
+    kmainwidget.h
 
 FORMS += \
     kmainwindow.ui
