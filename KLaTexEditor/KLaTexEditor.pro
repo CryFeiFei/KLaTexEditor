@@ -29,13 +29,13 @@ QMAKE_CXXFLAGS += -std=c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+    kmainwindow.cpp
 
 HEADERS += \
-        mainwindow.h
+    kmainwindow.h
 
 FORMS += \
-        mainwindow.ui
+    kmainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
