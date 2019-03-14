@@ -8,6 +8,7 @@
 #define KMAINWIDGET_H
 
 #include <QWidget>
+#include <QApplication>
 
 class QSplitter;
 class KTitleWidget;
@@ -22,11 +23,13 @@ public:
 
 signals:
 
-
 public slots:
 	void ShowMiniSize();
 	void ShowMaxSize();
 	void Close();
+
+private:
+	void _centerToScreen(QWidget* widget);
 
 private:
 	KTitleWidget* m_titleBar;

@@ -63,3 +63,4 @@ void KTitleWidget::mouseReleaseEvent(QMouseEvent *e)
 
 	QWidget::mouseReleaseEvent(e);
 }
+
