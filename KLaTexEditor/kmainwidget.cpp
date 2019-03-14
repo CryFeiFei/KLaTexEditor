@@ -11,12 +11,13 @@ KMainWidget::KMainWidget(QWidget *parent) : QWidget(parent)
 
 	// title bar
 	m_titleBar = new KTitleWidget(this);
+	this->setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
 	m_titleBar->setStyleSheet("background-color: rgb(122,122,122)");
 	m_titleBar->setMinimumHeight(50);
 	m_titleBar->setMaximumHeight(50);
 	mainLayout->addWidget(m_titleBar);
 //	connect(m_titleBar, SIGNAL(positionChanged(const QPoint&)), SLOT(onPositionChange(const QPoint&)));
-	connect(m_titleBar, SIGNAL(positionChanged(const QPoint&)), this, SIGNAL(positionchanged(const QPoint&)));
+//	connect(m_titleBar, SIGNAL(positionChanged(const QPoint&)), this, SIGNAL(positionchanged(const QPoint&)));
 
 	m_toolBar = new QWidget(this);
 	m_toolBar->setStyleSheet("background-color: rgb(200,200,200)");

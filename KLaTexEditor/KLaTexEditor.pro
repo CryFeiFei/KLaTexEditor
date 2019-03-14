@@ -29,17 +29,14 @@ QMAKE_CXXFLAGS += -std=c++11
 
 SOURCES += \
         main.cpp \
-    kmainwindow.cpp \
     kmainwidget.cpp \
     ktitlewidget.cpp
 
 HEADERS += \
-    kmainwindow.h \
     kmainwidget.h \
     ktitlewidget.h
 
 FORMS += \
-    kmainwindow.ui \
     ktitlewidget.ui
 
 # Default rules for deployment.

@@ -31,6 +31,7 @@ protected:
 private:
 	bool m_bPress;
 	QPoint m_movePos;
+	QPoint m_parentPos;
 };
 
 #endif // KTITLEWIDGET_H

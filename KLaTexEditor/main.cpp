@@ -1,11 +1,9 @@
-#include "kmainwindow.h"
 #include <QApplication>
-
+#include "kmainwidget.h"
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
-	KMainWindow w;
+	KMainWidget w;
 	w.show();
-
 	return a.exec();
 }
