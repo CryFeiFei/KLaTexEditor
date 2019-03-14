@@ -30,16 +30,22 @@ QMAKE_CXXFLAGS += -std=c++11
 SOURCES += \
         main.cpp \
     kmainwidget.cpp \
-    ktitlewidget.cpp
+    ktitlewidget.cpp \
+    ksubmainwidget.cpp
 
 HEADERS += \
     kmainwidget.h \
-    ktitlewidget.h
+    ktitlewidget.h \
+    ksubmainwidget.h
 
 FORMS += \
-    ktitlewidget.ui
+    ktitlewidget.ui \
+    ksubmainwidget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    klatexwebsource.qrc

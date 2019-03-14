@@ -12,6 +12,7 @@
 
 class QSplitter;
 class KTitleWidget;
+class KSubMainWidget;
 
 class KMainWidget : public QWidget
 {
@@ -35,6 +36,8 @@ private:
 	KTitleWidget* m_titleBar;
 	QWidget* m_toolBar;
 	QSplitter* m_Splitter;
+	KSubMainWidget* m_subMainWidget;
+
 private:
 	Q_DISABLE_COPY(KMainWidget)
 };

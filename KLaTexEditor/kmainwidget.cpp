@@ -3,6 +3,8 @@
 #include <QSplitter>
 #include <ktitlewidget.h>
 #include <QDesktopWidget>
+#include <QTextEdit>
+#include "ksubmainwidget.h"
 
 KMainWidget::KMainWidget(QWidget *parent) : QWidget(parent)
 {
@@ -24,9 +26,8 @@ KMainWidget::KMainWidget(QWidget *parent) : QWidget(parent)
 	m_toolBar->setMaximumHeight(30);
 	mainLayout->addWidget(m_toolBar);
 
-	m_Splitter = new QSplitter(this);
-	m_Splitter->setStyleSheet("background-color: rgb(60,60,60)");
-	mainLayout->addWidget(m_Splitter);
+	m_subMainWidget = new KSubMainWidget(this);
+	mainLayout->addWidget(m_subMainWidget);
 
 	mainLayout->setMargin(0);
 	mainLayout->setSpacing(0);

@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/html">
+        <file>resource/latex.html</file>
+    </qresource>
+</RCC>
