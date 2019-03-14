@@ -15,6 +15,9 @@ public:
 	explicit KMainWindow(QWidget *parent = nullptr);
 	~KMainWindow();
 
+public slots:
+	void onPositionChange(const QPoint& point);
+
 private:
 	Ui::KMainWindow *ui;
 };

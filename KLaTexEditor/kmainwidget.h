@@ -10,6 +10,7 @@
 #include <QWidget>
 
 class QSplitter;
+class KTitleWidget;
 
 class KMainWidget : public QWidget
 {
@@ -19,11 +20,13 @@ public:
 	explicit KMainWidget(QWidget *parent = nullptr);
 
 signals:
+	void positionchanged(const QPoint& point);
 
 public slots:
+	void onPositionChange(const QPoint& point);
 
 private:
-	QWidget* m_titleBar;
+	KTitleWidget* m_titleBar;
 	QWidget* m_toolBar;
 	QSplitter* m_Splitter;
 private:
