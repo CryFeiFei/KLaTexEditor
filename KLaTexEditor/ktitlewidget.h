@@ -21,9 +21,10 @@ private:
 	Ui::KTitleWidget *ui;
 
 signals:
-	void positionChanged(const QPoint& offset);
-	void homeBtnClicked();
-	void closeBtnClicked();
+	void miniButtonClicked();
+	void maxButtonClicked();
+	void closeButtonClicked();
+
 protected:
 	void mousePressEvent(QMouseEvent* e) override;
 	void mouseMoveEvent(QMouseEvent *e) override;

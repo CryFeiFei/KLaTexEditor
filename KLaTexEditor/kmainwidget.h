@@ -18,12 +18,15 @@ class KMainWidget : public QWidget
 public:
 	using QWidget::QWidget;
 	explicit KMainWidget(QWidget *parent = nullptr);
+	~KMainWidget();
 
 signals:
-	void positionchanged(const QPoint& point);
+
 
 public slots:
-	void onPositionChange(const QPoint& point);
+	void ShowMiniSize();
+	void ShowMaxSize();
+	void Close();
 
 private:
 	KTitleWidget* m_titleBar;

@@ -6,18 +6,16 @@
 KMainWidget::KMainWidget(QWidget *parent) : QWidget(parent)
 {
 	setObjectName("KMainWidget");
+	setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
 
 	QVBoxLayout* mainLayout = new QVBoxLayout(this);
 
 	// title bar
 	m_titleBar = new KTitleWidget(this);
-	this->setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
-	m_titleBar->setStyleSheet("background-color: rgb(122,122,122)");
-	m_titleBar->setMinimumHeight(50);
-	m_titleBar->setMaximumHeight(50);
+	connect(m_titleBar, SIGNAL(miniButtonClicked()), this, SLOT(ShowMiniSize()));
+	connect(m_titleBar, SIGNAL(maxButtonClicked()), this, SLOT(ShowMaxSize()));
+	connect(m_titleBar, SIGNAL(closeButtonClicked()), this, SLOT(Close()));
 	mainLayout->addWidget(m_titleBar);
-//	connect(m_titleBar, SIGNAL(positionChanged(const QPoint&)), SLOT(onPositionChange(const QPoint&)));
-//	connect(m_titleBar, SIGNAL(positionChanged(const QPoint&)), this, SIGNAL(positionchanged(const QPoint&)));
 
 	m_toolBar = new QWidget(this);
 	m_toolBar->setStyleSheet("background-color: rgb(200,200,200)");
@@ -31,10 +29,27 @@ KMainWidget::KMainWidget(QWidget *parent) : QWidget(parent)
 
 	mainLayout->setMargin(0);
 	mainLayout->setSpacing(0);
-	this->setLayout(mainLayout);
+	setLayout(mainLayout);
+
+	resize(700, 700);
 }
 
-void KMainWidget::onPositionChange(const QPoint &point)
+KMainWidget::~KMainWidget()
 {
-	this->move(point);
+
+}
+
+void KMainWidget::ShowMiniSize()
+{
+	this->showMinimized();
+}
+
+void KMainWidget::ShowMaxSize()
+{
+	this->showMaximized();
+}
+
+void KMainWidget::Close()
+{
+	this->close();
 }

@@ -10,6 +10,16 @@ KTitleWidget::KTitleWidget(QWidget *parent) :
 	setMouseTracking(true);
 	ui->setupUi(this);
 
+	setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
+	setStyleSheet("background-color: rgb(122,122,122)");
+
+
+	connect(ui->miniButton, SIGNAL(clicked()), this, SIGNAL(miniButtonClicked()));
+	connect(ui->maxButton, SIGNAL(clicked()), this, SIGNAL(maxButtonClicked()));
+	connect(ui->closeButton, SIGNAL(clicked()), this, SIGNAL(closeButtonClicked()));
+
+	setMinimumHeight(50);
+	setMaximumHeight(50);
 }
 
 KTitleWidget::~KTitleWidget()
