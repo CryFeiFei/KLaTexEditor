@@ -3,6 +3,7 @@
 <!-- KaTeX requires the use of the HTML5 doctype. Without it, KaTeX may not render properly -->
 
 <html>
+<meta charset="UTF-8">
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.css" integrity="sha384-dbVIfZGuN1Yq7/1Ocstc1lUEm+AT+/rCkibIcC/OmWo5f0EA48Vf8CytHzGrSwbQ" crossorigin="anonymous">
     <!-- The loading of KaTeX is deferred to speed up page rendering -->
@@ -37,17 +38,49 @@ button {
             });
         return html;
     }
-    function setLatexRender(element1)
+    function setLatexRender(element)
     {
-        katex.render("c = \\pm\\sqrt{a^2 + b^2}", element1, {
+        katex.render("c = \\pm\\sqrt{a^2 + b^2}", element, {
             throwOnError: false
             });
+    }
+
+    function setLatexRenderByString(strFormula, element)
+    {
+        katex.render(strFormula, element, {
+	    throwOnError: false
+	    });
+    }
+
+    function setLatexRenderByString1(strFormula)
+    {
+        var smalls = document.getElementById('latexrender');
+	    katex.render(strFormula, smalls, {
+	    throwOnError: false
+	    });
     }
 
     function InitFrame()
     {
         var smalls = document.getElementById('latexrender')
         setLatexRender(smalls);
+    }
+
+    function test1()
+    {
+        alert("123");
+    }
+
+    function test2(element)
+    {
+        alert(element)
+        setLatexRenderByString1(element)
+//        var smalls = document.getElementById('latexrender');
+ //       alert(element)
+ //       setLatexRenderByRawString(element, smalls)
+//        var str = element;
+ //       InitFrame()
+//	alert(str);
     }
 </script>
 <body>

@@ -15,6 +15,9 @@ public:
 	explicit KSubMainWidget(QWidget *parent = 0);
 	~KSubMainWidget();
 
+public slots:
+	void refershFormula();
+
 private:
 	Ui::KSubMainWidget *ui;
 };

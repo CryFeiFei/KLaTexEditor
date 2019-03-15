@@ -3,6 +3,8 @@
 #include <QFile>
 #include <QTextStream>
 #include <QDebug>
+#include <QWebPage>
+#include <QWebFrame>
 
 KSubMainWidget::KSubMainWidget(QWidget *parent) :
 	QWidget(parent),
@@ -16,11 +18,9 @@ KSubMainWidget::KSubMainWidget(QWidget *parent) :
 	{
 		QTextStream textStream(&file);
 		QString  str = textStream.readAll();
-		qDebug()<<"right"<<endl;
-		qDebug()<<str<<endl;
+//		qDebug()<<"right"<<endl;
+//		qDebug()<<str<<endl;
 		QByteArray by = str.toUtf8();
-//		QByteArray by = textStream.readAll().toUtf8();
-//		qDebug()<<textStream.readAll();
 		ui->latexWebView->setContent(by);
 		file.close();
 	}
@@ -28,10 +28,39 @@ KSubMainWidget::KSubMainWidget(QWidget *parent) :
 	{
 		qDebug()<<"error"<<endl;
 	}
+
+	connect(ui->latexPushButton, SIGNAL(clicked()), this, SLOT(refershFormula()));
 //	ui->latexWebView->setContent();
 }
 
 KSubMainWidget::~KSubMainWidget()
 {
 	delete ui;
+}
+
+void KSubMainWidget::refershFormula()
+{
+//	QString strFormat = ui->textEdit->toPlainText();
+	QString str1 = "\\\\";
+	QString str2 = "\\\\\\\\";
+	qDebug()<<str1<<"		"<<str2<<endl;
+
+
+	QString strFormat = "c = \\\\pm\\\\sqrt{a^2 + b^2}";
+	qDebug()<<strFormat<<endl;
+
+
+	QString strFormat1 = "c = \pm\sqrt{a^2 + b^2}";
+	qDebug()<<strFormat1<<endl;
+
+
+	QString strFormatA = ui->textEdit->toPlainText();
+	qDebug()<<strFormatA<<endl;
+	strFormatA = strFormatA.replace("\\", "\\\\");
+//	strFormat = strFormat.toUtf8();
+	QWebFrame* webFrame =  ui->latexWebView->page()->currentFrame();
+//	QString jsCommand = QString("setLatexRenderByString1(%1)").arg(strFormat);
+	QString jstest2 = QString("test2(\"%1\")").arg(strFormatA);
+	qDebug()<<jstest2<<endl;
+	webFrame->evaluateJavaScript(jstest2);
 }

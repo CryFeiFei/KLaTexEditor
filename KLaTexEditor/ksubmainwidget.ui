@@ -24,6 +24,19 @@
          <height>0</height>
         </size>
        </property>
+       <widget class="QPushButton" name="latexPushButton">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>110</y>
+          <width>71</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>PushButton</string>
+        </property>
+       </widget>
       </widget>
      </item>
      <item>
