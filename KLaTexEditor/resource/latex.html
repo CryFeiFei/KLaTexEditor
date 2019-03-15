@@ -12,24 +12,25 @@
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
         onload="renderMathInElement(document.body);"></script>
 </head>
-
 <style>
-*{
-  margin: 0;
-  padding: 0;
+html, body 
+{
+margin:0;
+padding:0;
+}
+.latexRenderBox {
+    height:100%;
+    width:100%;
+    border: 1px solid green;
+    position:fixed;
+    background-color:gray;
+    text-align:center;
+    vertical-align:middle;
 }
 
-button {
-    background: #17a086;
-    color: #fff;
-    padding: 5px;
-    outline: none;
-    border: 1px solid transparent;
-    border-radius: 5px;
-    font-size: 13px;
-    margin-bottom: 5px;
- }
+
 </style>
+
 <script type="text/javascript">
     function getLatexString()
     {
@@ -52,7 +53,7 @@ button {
 	    });
     }
 
-    function setLatexRenderByString1(strFormula)
+    function setLatexRenderByString(strFormula)
     {
         var smalls = document.getElementById('latexrender');
 	    katex.render(strFormula, smalls, {
@@ -60,35 +61,23 @@ button {
 	    });
     }
 
-    function InitFrame()
-    {
-        var smalls = document.getElementById('latexrender')
-        setLatexRender(smalls);
-    }
-
-    function test1()
-    {
-        alert("123");
-    }
-
-    function test2(element)
-    {
-        alert(element)
-        setLatexRenderByString1(element)
-//        var smalls = document.getElementById('latexrender');
- //       alert(element)
- //       setLatexRenderByRawString(element, smalls)
-//        var str = element;
- //       InitFrame()
-//	alert(str);
-    }
 </script>
 <body>
-  <div id="doc" align="left" style="position:inherit">
-            <button onclick="InitFrame()">render</button>
-            <div id = "latex" style="background:#FFF; color:#000" style="width:100px;height: 100px">
+
+  <!-- <div id="doc" align="left" style="position:inherit">
+        <div id = "latex">
                 <span id = "latexrender" style="background-color:#FFF">latex</span>
-            </div>
-  </div>
+        </div>
+  </div> -->
+<!-- //只是为了公式居中 -->
+<table class="latexRenderBox">
+    <tr><th>
+        <span id = "latexrender" style="background-color:#FFF">latex</span>
+    </th></tr>
+</table>
+<!-- <div class="latexRenderBox">
+    <span id = "latexrender" style="background-color:#FFF" style="vertical-align:middle;">latex</span>
+</div> -->
+
 </body>
 </html>
