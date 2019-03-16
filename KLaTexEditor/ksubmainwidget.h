@@ -2,6 +2,7 @@
 #define KSUBMAINWIDGET_H
 
 #include <QWidget>
+class QTimer;
 
 namespace Ui {
 class KSubMainWidget;
@@ -17,9 +18,12 @@ public:
 
 public slots:
 	void refershFormula();
+	void refershStart();
 
 private:
+	QTimer* m_refershTimer;
 	Ui::KSubMainWidget *ui;
+	QString m_strFormula;
 };
 
 #endif // KSUBMAINWIDGET_H
