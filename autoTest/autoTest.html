@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<!-- KaTeX requires the use of the HTML5 doctype. Without it, KaTeX may not render properly -->
+
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.css" integrity="sha384-dbVIfZGuN1Yq7/1Ocstc1lUEm+AT+/rCkibIcC/OmWo5f0EA48Vf8CytHzGrSwbQ" crossorigin="anonymous">
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.js" integrity="sha384-2BKqo+exmr9su6dir+qCw08N2ZKRucY4PrGQPPWU1A7FtlCGjmEGFqXCv5nyM5Ij" crossorigin="anonymous"></script>
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+</head>
+
+<style>
+*{
+  margin: 0;
+  padding: 0;
+}
+button {
+    background: #17a086;
+    color: #fff;
+    padding: 5px;
+    outline: none;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    font-size: 13px;
+    margin-bottom: 5px;
+ }
+</style>
+<script type="text/javascript">
+    function getLatexString()
+    {
+        var html = katex.renderToString("c = \\pm\\sqrt{a^2 + b^2}", {
+            throwOnError: false
+            });
+        return html;
+    }
+    function setLatexRender(element1)
+    {
+        katex.render("c = \\pm\\sqrt{a^2 + b^2}", element1, {
+            throwOnError: false
+            });
+    }
+    function InitFrame()
+    {
+        var smalls = document.getElementById('latexrender')
+        setLatexRender(smalls);
+    }
+</script>
+ <body>
+  <div id="doc" align="left" style="position:inherit">
+            <button onclick="InitFrame()">初始化插件</button>
+            <div id = "latex" style="width:300px;height: 300px">
+                <span id = "latexrender">背景颜色</span>
+            </div>
+  </div>
+ </body>
+</html>
