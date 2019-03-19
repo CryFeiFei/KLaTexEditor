@@ -42,27 +42,15 @@ button {
             throwOnError: false
             });
     }
-    function setLatexRenderByRawString(element)
-    {
-        katex.render(String.raw`\sum_i \hat{\psi_i} cos(\alpha_i \pm \omega t)`, element, {
-            throwOnError: false
-        });
-    }
     function InitFrame()
     {
         var smalls = document.getElementById('latexrender')
         setLatexRender(smalls);
     }
-    function InitFrameByRaw()
-    {
-        var element =  document.getElementById('latexrender')
-        setLatexRenderByRawString(element);
-    }
 </script>
  <body>
   <div id="doc" align="left" style="position:inherit">
             <button onclick="InitFrame()">初始化插件</button>
-            <button onclick="InitFrameByRaw()">初始化插件byRaw</button>
             <div id = "latex" style="width:300px;height: 300px">
                 <span id = "latexrender">背景颜色</span>
             </div>

@@ -9,7 +9,7 @@
 KMainWidget::KMainWidget(QWidget *parent) : QWidget(parent)
 {
 	setObjectName("KMainWidget");
-	setWindowFlags(Qt::FramelessWindowHint);
+	setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
 
 	QVBoxLayout* mainLayout = new QVBoxLayout(this);
 
