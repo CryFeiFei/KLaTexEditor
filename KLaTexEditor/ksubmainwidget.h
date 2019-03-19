@@ -2,7 +2,9 @@
 #define KSUBMAINWIDGET_H
 
 #include <QWidget>
+#include <QWebEngineView>
 class QTimer;
+
 
 namespace Ui {
 class KSubMainWidget;
@@ -24,6 +26,7 @@ private:
 	QTimer* m_refershTimer;
 	Ui::KSubMainWidget *ui;
 	QString m_strFormula;
+	QWebEngineView* m_webView;
 };
 
 #endif // KSUBMAINWIDGET_H

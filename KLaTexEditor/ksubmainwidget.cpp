@@ -3,34 +3,29 @@
 #include <QFile>
 #include <QTextStream>
 #include <QDebug>
-#include <QWebPage>
-#include <QWebFrame>
 #include <QTimer>
+#include <QtWebEngine>
+#include <QtWebEngineWidgets/QWebEngineView>
 
 KSubMainWidget::KSubMainWidget(QWidget *parent) :
 	QWidget(parent),
 	ui(new Ui::KSubMainWidget)
 {
 	ui->setupUi(this);
-	ui->latexWebView->load(QUrl(":/html/resource/latex.html"));
+	m_webView = new QWebEngineView(this);
+//	m_webView->setFixedWidth(300);
+//	ui->verticalLayout->addWidget(m_webView);
+//	ui->verticalLayout->insertWidget(1, m_webView);
+	ui->webMainLayout->addWidget(m_webView);
+
 	QFile file(":/html/resource/latex.html");
-	if (file.open(QIODevice::ReadOnly | QIODevice::Text))
-	{
-		QTextStream textStream(&file);
-		QString  str = textStream.readAll();
-		QByteArray by = str.toUtf8();
-		ui->latexWebView->setContent(by);
-		file.close();
-	}
-	else
-	{
-		qDebug()<<" load html error"<<endl;
-	}
+	m_webView->load(QUrl("qrc:/html/resource/latex.html"));
 
 	m_refershTimer = new QTimer(this);
 
 	connect(ui->textEdit, SIGNAL(textChanged()), SLOT(refershStart()));
 	connect(m_refershTimer, SIGNAL(timeout()), this, SLOT(refershFormula()));
+//	connect(ui->latexPushButton, &QPushButton::clicked, this, &KSubMainWidget::refershFormula);
 }
 
 KSubMainWidget::~KSubMainWidget()
@@ -49,30 +44,22 @@ void KSubMainWidget::refershStart()
 
 void KSubMainWidget::refershFormula()
 {
-//	QString strFormat = ui->textEdit->toPlainText();
-//	QString str1 = "\\\\";
-//	QString str2 = "\\\\\\\\";
-//	qDebug()<<str1<<"		"<<str2<<endl;
+	QString strFormat = ui->textEdit->toPlainText();
 
-
-//	QString strFormat = "c = \\\\pm\\\\sqrt{a^2 + b^2}";
-//	qDebug()<<strFormat<<endl;
-
-
-//	QString strFormat1 = "c = \pm\sqrt{a^2 + b^2}";
-//	qDebug()<<strFormat1<<endl;
 	// 文本没有变化的话，不用刷新。
-	if (m_strFormula == ui->textEdit->toPlainText())
-		return;
+//	if (m_strFormula == ui->textEdit->toPlainText())
+//		return;
 
-	QString strFormatA = ui->textEdit->toPlainText();
-	m_strFormula = strFormatA;
-	strFormatA.replace("\\", "\\\\");
+	m_strFormula = strFormat;
+
+//	m_strFormula = strFormatA;
+	strFormat.replace("\\", "\\\\");
 
 	//delete space
-	strFormatA.remove(QRegExp("\\s"));
-	QWebFrame* webFrame =  ui->latexWebView->page()->currentFrame();
-	QString jstest2 = QString("setLatexRenderByString(\"%1\")").arg(strFormatA);
-//	qDebug()<<jstest2<<endl;
-	webFrame->evaluateJavaScript(jstest2);
+//	strFormatA.remove(QRegExp("\\s"));
+	strFormat.remove(QRegExp("[\r\n]"));
+	qDebug()<<strFormat<<endl;
+	QString runJS = QString("renderLatexByRaw(\"%1\")").arg(strFormat);
+	qDebug()<<runJS<<endl;
+	m_webView->page()->runJavaScript(runJS);
 }

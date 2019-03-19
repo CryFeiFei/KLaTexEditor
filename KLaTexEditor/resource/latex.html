@@ -60,6 +60,20 @@ padding:0;
 	    throwOnError: false
 	    });
     }
+    function setLatexRenderByRawString(latexString, element)
+    {
+        katex.render(latexString, element, {
+            throwOnError: false
+        });
+    }
+
+    //final
+    function renderLatexByRaw(latexString)
+    {
+//      alert(latexString);
+        var element =  document.getElementById('latexrender')
+        setLatexRenderByRawString(latexString, element);
+    }
 
 </script>
 <body>
