@@ -13,10 +13,8 @@ KSubMainWidget::KSubMainWidget(QWidget *parent) :
 {
 	ui->setupUi(this);
 	m_webView = new QWebEngineView(this);
-//	m_webView->setFixedWidth(300);
-//	ui->verticalLayout->addWidget(m_webView);
-//	ui->verticalLayout->insertWidget(1, m_webView);
 	ui->webMainLayout->addWidget(m_webView);
+	ui->webMainLayout->setMargin(0);
 
 	QFile file(":/html/resource/latex.html");
 	m_webView->load(QUrl("qrc:/html/resource/latex.html"));
@@ -25,7 +23,6 @@ KSubMainWidget::KSubMainWidget(QWidget *parent) :
 
 	connect(ui->textEdit, SIGNAL(textChanged()), SLOT(refershStart()));
 	connect(m_refershTimer, SIGNAL(timeout()), this, SLOT(refershFormula()));
-//	connect(ui->latexPushButton, &QPushButton::clicked, this, &KSubMainWidget::refershFormula);
 }
 
 KSubMainWidget::~KSubMainWidget()
