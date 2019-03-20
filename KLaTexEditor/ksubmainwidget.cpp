@@ -47,19 +47,24 @@ void KSubMainWidget::refershFormula()
 	QString strFormat = ui->textEdit->toPlainText();
 
 	// 文本没有变化的话，不用刷新。
-//	if (m_strFormula == ui->textEdit->toPlainText())
-//		return;
+	if (m_strFormula == ui->textEdit->toPlainText())
+		return;
 
 	m_strFormula = strFormat;
 
-//	m_strFormula = strFormatA;
 	strFormat.replace("\\", "\\\\");
 
 	//delete space
 //	strFormatA.remove(QRegExp("\\s"));
 	strFormat.remove(QRegExp("[\r\n]"));
+#ifdef QT_DEBUG
 	qDebug()<<strFormat<<endl;
+#endif
+
 	QString runJS = QString("renderLatexByRaw(\"%1\")").arg(strFormat);
+
+#ifdef QT_DEBUG
 	qDebug()<<runJS<<endl;
+#endif
 	m_webView->page()->runJavaScript(runJS);
 }
