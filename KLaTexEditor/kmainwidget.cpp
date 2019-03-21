@@ -20,6 +20,7 @@ KMainWidget::KMainWidget(QWidget *parent) : QWidget(parent)
 	connect(m_titleBar, SIGNAL(maxButtonClicked()), this, SLOT(ShowMaxSize()));
 	connect(m_titleBar, SIGNAL(closeButtonClicked()), this, SLOT(Close()));
 	mainLayout->addWidget(m_titleBar);
+	m_titleBar->setVisible(false);
 
 	m_toolBar = new QWidget(this);
 	m_toolBar->setStyleSheet("background-color: rgb(200,200,200)");
