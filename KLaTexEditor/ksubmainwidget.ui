@@ -24,6 +24,11 @@
          <height>120</height>
         </size>
        </property>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <layout class="QVBoxLayout" name="toolbarLayout"/>
+        </item>
+       </layout>
       </widget>
      </item>
      <item>
