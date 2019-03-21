@@ -19,8 +19,12 @@ KSubMainWidget::KSubMainWidget(QWidget *parent) :
 	QFile file(":/html/resource/latex.html");
 	m_webView->load(QUrl("qrc:/html/resource/latex.html"));
 
-	m_refershTimer = new QTimer(this);
 
+	m_mathjaxView = new QWebEngineView(this);
+	ui->webMainLayout->addWidget(m_mathjaxView);
+	m_mathjaxView->load(QUrl("qrc:/html/resource/mathjax1.html"));
+
+	m_refershTimer = new QTimer(this);
 	connect(ui->textEdit, SIGNAL(textChanged()), SLOT(refershStart()));
 	connect(m_refershTimer, SIGNAL(timeout()), this, SLOT(refershFormula()));
 }

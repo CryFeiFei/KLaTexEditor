@@ -27,6 +27,7 @@ private:
 	Ui::KSubMainWidget *ui;
 	QString m_strFormula;
 	QWebEngineView* m_webView;
+	QWebEngineView* m_mathjaxView;
 };
 
 #endif // KSUBMAINWIDGET_H

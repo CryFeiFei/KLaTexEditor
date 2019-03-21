@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/html">
         <file>resource/latex.html</file>
+        <file>resource/mathjax1.html</file>
     </qresource>
 </RCC>
