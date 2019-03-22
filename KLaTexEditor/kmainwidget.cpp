@@ -5,6 +5,9 @@
 #include <QDesktopWidget>
 #include <QTextEdit>
 #include "ksubmainwidget.h"
+///////////////
+#include "krbtoolbar/krbtoolbar.h"
+//////////////
 
 KMainWidget::KMainWidget(QWidget *parent) : QWidget(parent)
 {
@@ -22,10 +25,10 @@ KMainWidget::KMainWidget(QWidget *parent) : QWidget(parent)
 	mainLayout->addWidget(m_titleBar);
 	m_titleBar->setVisible(false);
 
-	m_toolBar = new QWidget(this);
-	m_toolBar->setStyleSheet("background-color: rgb(200,200,200)");
-	m_toolBar->setMinimumHeight(30);
-	m_toolBar->setMaximumHeight(30);
+	m_toolBar = new KRbToolBar(this);
+	m_toolBar->setStyleSheet("background-color: blue");
+	m_toolBar->setMinimumHeight(100);
+	m_toolBar->setMaximumHeight(100);
 	mainLayout->addWidget(m_toolBar);
 
 	m_subMainWidget = new KSubMainWidget(this);

@@ -7,7 +7,9 @@
 QT       += core gui
 
 QT += webenginewidgets
-QT += webengine
+#x11 support
+QT += x11extras
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = KLaTexEditor
@@ -33,12 +35,17 @@ SOURCES += \
         main.cpp \
     kmainwidget.cpp \
     ktitlewidget.cpp \
-    ksubmainwidget.cpp
+    ksubmainwidget.cpp \
+    krbtoolbar/krbtabbar.cpp \
+    krbtoolbar/krbtoolbar.cpp
 
 HEADERS += \
     kmainwidget.h \
     ktitlewidget.h \
-    ksubmainwidget.h
+    ksubmainwidget.h \
+    krbtoolbar/krbtabbar.h \
+    krbtoolbar/krbtoolbar.h \
+    kglobal.h
 
 FORMS += \
     ktitlewidget.ui \

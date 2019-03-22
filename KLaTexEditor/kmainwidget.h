@@ -13,6 +13,7 @@
 class QSplitter;
 class KTitleWidget;
 class KSubMainWidget;
+class KRbToolBar;
 
 class KMainWidget : public QWidget
 {
@@ -34,7 +35,7 @@ private:
 
 private:
 	KTitleWidget* m_titleBar;
-	QWidget* m_toolBar;
+	KRbToolBar* m_toolBar;
 	QSplitter* m_Splitter;
 	KSubMainWidget* m_subMainWidget;
 
