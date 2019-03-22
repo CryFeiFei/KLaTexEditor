@@ -5,11 +5,41 @@
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
 </script>
+<style>
+html, body 
+{
+  margin:0;
+  padding:0;
+  }
+  .latexRenderBox {
+      height:100%;
+      width:100%;
+      position:fixed;
+      background-color:white;
+      text-align:center;
+      vertical-align:middle;
+  }
+</style>
 <script type="text/javascript"
-  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+    function renderLatexByRaw(latexString)
+    {
+        var element =  document.getElementById('latexrender')
+        element.innerHTML = latexString;
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
 </script>
 </head>
 <body>
- $$ c = \pm\sqrt{a^2 + b^2}$$
+
+    <table class="latexRenderBox">
+        <tr><th>
+            <span id = "latexrender" style="background-color:#FFF">Welcome to use KLatexEditor</span>
+        </th></tr>
+    </table>
+<!-- When $a \ne 0$, there are two solutions to \(ax^2 + bx + c = 0\) and they are
+$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$ -->
 </body>
 </html>

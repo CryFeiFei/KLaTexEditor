@@ -27,6 +27,7 @@ KSubMainWidget::KSubMainWidget(QWidget *parent) :
 	m_refershTimer = new QTimer(this);
 	connect(ui->textEdit, SIGNAL(textChanged()), SLOT(refershStart()));
 	connect(m_refershTimer, SIGNAL(timeout()), this, SLOT(refershFormula()));
+	connect(m_refershTimer, SIGNAL(timeout()), this, SLOT(referMathJax()));
 }
 
 KSubMainWidget::~KSubMainWidget()
@@ -48,10 +49,10 @@ void KSubMainWidget::refershFormula()
 	QString strFormat = ui->textEdit->toPlainText();
 
 	// 文本没有变化的话，不用刷新。
-	if (m_strFormula == ui->textEdit->toPlainText())
-		return;
+//	if (m_strFormula == ui->textEdit->toPlainText())
+//		return;
 
-	m_strFormula = strFormat;
+//	m_strFormula = strFormat;
 
 	strFormat.replace("\\", "\\\\");
 
@@ -68,4 +69,34 @@ void KSubMainWidget::refershFormula()
 	qDebug()<<runJS<<endl;
 #endif
 	m_webView->page()->runJavaScript(runJS);
+}
+
+// 这个必须控制刷新次数，要不然网页刷新有问题
+void KSubMainWidget::referMathJax()
+{
+	QString strFormat = ui->textEdit->toPlainText();
+
+	// 文本没有变化的话，不用刷新。
+	if (m_strFormula == ui->textEdit->toPlainText())
+		return;
+
+	m_strFormula = strFormat;
+
+	strFormat.replace("\\", "\\\\");
+
+	//delete space
+//	strFormatA.remove(QRegExp("\\s"));
+	strFormat.remove(QRegExp("[\r\n]"));
+#ifdef QT_DEBUG
+	qDebug()<<strFormat<<endl;
+#endif
+	strFormat.insert(0, QString("$$"));
+	strFormat.append(QString("$$"));
+
+	QString runJS = QString("renderLatexByRaw(\"%1\")").arg(strFormat);
+
+#ifdef QT_DEBUG
+	qDebug()<<runJS<<endl;
+#endif
+	m_mathjaxView->page()->runJavaScript(runJS);
 }

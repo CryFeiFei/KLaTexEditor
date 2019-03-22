@@ -21,6 +21,7 @@ public:
 public slots:
 	void refershFormula();
 	void refershStart();
+	void referMathJax();
 
 private:
 	QTimer* m_refershTimer;
