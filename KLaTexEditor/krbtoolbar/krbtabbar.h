@@ -2,18 +2,15 @@
 #define KRBTABBAR_H
 
 #include <QWidget>
-#include <QTabBar>
+#include <QButtonGroup>
 
-class KRbTabBarImp : public QTabBar
-{
-
-};
+class KRbButtonGroup;
 
 class KRbTabBar : public QWidget
 {
 	Q_OBJECT
 public:
-	explicit KRbTabBar(QWidget *parent = nullptr);
+	KRbTabBar(QWidget *parent = nullptr);
 	~KRbTabBar();
 
 signals:
@@ -22,7 +19,7 @@ public slots:
 
 private:
 	QWidget* m_miniToolWidget;
-	QTabBar* m_tabbar;
+	KRbButtonGroup* m_buttonGroup;
 };
 
 #endif // KRBTABBAR_H

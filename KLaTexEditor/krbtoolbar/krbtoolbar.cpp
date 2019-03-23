@@ -6,16 +6,17 @@
 
 KRbToolBar::KRbToolBar(QWidget *parent) : QWidget(parent)
 {
-	m_rbTabBar = new KRbTabBar(this);
-	m_rbTabBar->setFixedHeight(KStyle::dpiScale(50));
-
 	QVBoxLayout* mainLayout = new QVBoxLayout(this);
+
+	m_rbTabBar = new KRbTabBar(this);
+	m_rbTabBar->setFixedHeight(KStyle::dpiScale(30));
 	mainLayout->addWidget(m_rbTabBar);
 
 	m_rbTabWidget = new QWidget(this);
 	mainLayout->addWidget(m_rbTabWidget);
 
 	mainLayout->setMargin(0);
-	this->setLayout(mainLayout);
+	mainLayout->setSpacing(0);
+	setLayout(mainLayout);
 
 }

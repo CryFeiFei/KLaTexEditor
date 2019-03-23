@@ -13,7 +13,7 @@
         onload="renderMathInElement(document.body);"></script>
 </head>
 <style>
-html, body 
+html, body
 {
 margin:0;
 padding:0;
@@ -28,6 +28,30 @@ padding:0;
 }
 
 </style>
+<!-- 为了解析公式方便 -->
+<script>
+   renderMathInElement(document.body,
+   {
+              delimiters: [
+                  {left: "$$", right: "$$", display: true},
+                  {left: "$", right: "$", display: false}
+              ]
+          }
+  );
+</script>
+
+<!--<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body,
+        {
+            delimiters:
+            [
+                  {left: "$$", right: "$$", display: true},
+                  {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>-->
 
 <script type="text/javascript">
     function getLatexString()
@@ -47,16 +71,16 @@ padding:0;
     function setLatexRenderByString(strFormula, element)
     {
         katex.render(strFormula, element, {
-	    throwOnError: false
-	    });
+            throwOnError: false
+            });
     }
 
     function setLatexRenderByString(strFormula)
     {
         var smalls = document.getElementById('latexrender');
-	    katex.render(strFormula, smalls, {
-	    throwOnError: false
-	    });
+            katex.render(strFormula, smalls, {
+            throwOnError: false
+            });
     }
     function setLatexRenderByRawString(latexString, element)
     {
@@ -65,13 +89,23 @@ padding:0;
         });
     }
 
-    //final
-    function renderLatexByRaw(latexString)
+    //这个是行内公式才用这个显示
+    function renderLatexByRaw1(latexString)
     {
 //      alert(latexString);
         var element =  document.getElementById('latexrender')
         setLatexRenderByRawString(latexString, element);
     }
+
+    //这个是行外公式显示
+    function renderLatexByRaw(latexString)
+    {
+//      alert(latexString);
+        var element =  document.getElementById('latexrender')
+        element.innerHTML = latexString;
+        renderMathInElement(document.body);
+    }
+
 
 </script>
 <body>

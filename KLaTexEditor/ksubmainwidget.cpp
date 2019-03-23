@@ -4,7 +4,6 @@
 #include <QTextStream>
 #include <QDebug>
 #include <QTimer>
-#include <QtWebEngine>
 #include <QtWebEngineWidgets/QWebEngineView>
 
 KSubMainWidget::KSubMainWidget(QWidget *parent) :
@@ -17,12 +16,12 @@ KSubMainWidget::KSubMainWidget(QWidget *parent) :
 	ui->webMainLayout->setMargin(0);
 
 	QFile file(":/html/resource/latex.html");
-	m_webView->load(QUrl("qrc:/html/resource/latex.html"));
+	m_webView->load(QUrl("qrc:/html/resource/katex.html"));
 
 
 	m_mathjaxView = new QWebEngineView(this);
 	ui->webMainLayout->addWidget(m_mathjaxView);
-	m_mathjaxView->load(QUrl("qrc:/html/resource/mathjax1.html"));
+	m_mathjaxView->load(QUrl("qrc:/html/resource/mathjax.html"));
 
 	m_refershTimer = new QTimer(this);
 	connect(ui->textEdit, SIGNAL(textChanged()), SLOT(refershStart()));
@@ -62,7 +61,8 @@ void KSubMainWidget::refershFormula()
 #ifdef QT_DEBUG
 	qDebug()<<strFormat<<endl;
 #endif
-
+	strFormat.insert(0, QString("$$"));
+	strFormat.append(QString("$$"));
 	QString runJS = QString("renderLatexByRaw(\"%1\")").arg(strFormat);
 
 #ifdef QT_DEBUG
