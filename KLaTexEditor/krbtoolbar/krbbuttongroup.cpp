@@ -25,10 +25,10 @@ KRbButtonGroup::KRbButtonGroup(QWidget *parent) : QWidget(parent)
 	//keyianxia
 	pushbutton1->setCheckable(true);
 	pushbutton2->setCheckable(true);
-	pushbutton1->setFixedSize(KStyle::dpiScale(50) ,KStyle::dpiScale(30));
-	pushbutton2->setFixedSize(KStyle::dpiScale(50) ,KStyle::dpiScale(30));
-	pushbutton1->setGeometry(0, 0, KStyle::dpiScale(50) ,KStyle::dpiScale(30));
-	pushbutton2->setGeometry(KStyle::dpiScale(50), 0, KStyle::dpiScale(50) ,KStyle::dpiScale(30));
+	pushbutton1->setFixedSize(KStyle::dpiScale(75) ,KStyle::dpiScale(30));
+	pushbutton2->setFixedSize(KStyle::dpiScale(75) ,KStyle::dpiScale(30));
+	pushbutton1->setGeometry(0, 0, KStyle::dpiScale(75) ,KStyle::dpiScale(30));
+	pushbutton2->setGeometry(KStyle::dpiScale(75), 0, KStyle::dpiScale(75) ,KStyle::dpiScale(30));
 	pushbutton1->setText("start");
 	pushbutton2->setText("view");
 	QString strButtonStyleSheet = QString("QPushButton{border:none;color:rgb(0, 0, 0);}"

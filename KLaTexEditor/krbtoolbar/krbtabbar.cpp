@@ -13,12 +13,10 @@ KRbTabBar::KRbTabBar(QWidget *parent) : QWidget(parent)
 
 	m_miniToolWidget = new QWidget(this);
 	m_miniToolWidget->setStyleSheet("background-color:black;");
-	m_miniToolWidget->setFixedWidth(KStyle::dpiScale(50));
-
+	m_miniToolWidget->setFixedWidth(KStyle::dpiScale(120));
 	mainLayout->addWidget(m_miniToolWidget);
 
 	m_buttonGroup = new KRbButtonGroup(this);
-
 	mainLayout->addWidget(m_buttonGroup);
 
 	mainLayout->setMargin(0);
