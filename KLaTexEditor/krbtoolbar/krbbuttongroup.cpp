@@ -32,9 +32,11 @@ KRbButtonGroup::KRbButtonGroup(QWidget *parent) : QWidget(parent)
 	m_viewButton->setObjectName("RbViewButton");
 
 	QButtonGroup* buttonGroup = new QButtonGroup(this);
-	buttonGroup->addButton(m_startButton);
-	buttonGroup->addButton(m_viewButton);
+	buttonGroup->addButton(m_startButton, 0);
+	buttonGroup->addButton(m_viewButton, 1);
 	buttonGroup->setExclusive(true);
+
+	connect(buttonGroup, SIGNAL(buttonPressed(int)), this, SIGNAL(tabChanged(int)));
 }
 
 void KRbButtonGroup::paintEvent(QPaintEvent *e)

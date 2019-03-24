@@ -14,6 +14,7 @@ public:
 	~KRbTabBar();
 
 signals:
+	void tabChanged(int index);
 
 public slots:
 

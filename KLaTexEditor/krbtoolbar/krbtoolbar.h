@@ -6,6 +6,8 @@
 #define KRBTOOLBAR_H
 
 #include <QWidget>
+#include <QStackedWidget>
+
 class KRbTabBar;
 
 class KRbToolBar : public QWidget
@@ -20,7 +22,8 @@ public slots:
 
 private:
 	KRbTabBar* m_rbTabBar;
-	QWidget* m_rbTabWidget;
+	QStackedWidget* m_rbTabWidget;
+//	QWidget* m_rbTabWidget;
 };
 
 #endif // KRBTOOLBAR_H

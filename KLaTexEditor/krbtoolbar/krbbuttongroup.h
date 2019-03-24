@@ -19,6 +19,7 @@ public:
 	void paintEvent(QPaintEvent* );
 
 signals:
+	void tabChanged(int index);
 
 public slots:
 

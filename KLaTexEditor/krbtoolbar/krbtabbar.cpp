@@ -17,11 +17,11 @@ KRbTabBar::KRbTabBar(QWidget *parent) : QWidget(parent)
 	mainLayout->addWidget(m_miniToolWidget);
 
 	m_buttonGroup = new KRbButtonGroup(this);
+	connect(m_buttonGroup, SIGNAL(tabChanged(int)), this, SIGNAL(tabChanged(int)));
 	mainLayout->addWidget(m_buttonGroup);
 
 	mainLayout->setMargin(0);
 	mainLayout->setSpacing(0);
-
 	setLayout(mainLayout);
 
 
