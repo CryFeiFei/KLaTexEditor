@@ -17,21 +17,6 @@
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QWidget" name="widget_2" native="true">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>120</height>
-        </size>
-       </property>
-       <layout class="QVBoxLayout" name="verticalLayout_3">
-        <item>
-         <layout class="QVBoxLayout" name="toolbarLayout"/>
-        </item>
-       </layout>
-      </widget>
-     </item>
-     <item>
       <widget class="QWidget" name="webWidget" native="true">
        <property name="minimumSize">
         <size>
@@ -39,10 +24,7 @@
          <height>120</height>
         </size>
        </property>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <property name="spacing">
-         <number>0</number>
-        </property>
+       <layout class="QGridLayout" name="gridLayout_2">
         <property name="leftMargin">
          <number>0</number>
         </property>
@@ -55,8 +37,8 @@
         <property name="bottomMargin">
          <number>0</number>
         </property>
-        <item>
-         <layout class="QHBoxLayout" name="webMainLayout"/>
+        <item row="0" column="0">
+         <layout class="QGridLayout" name="webMainLayout"/>
         </item>
        </layout>
       </widget>

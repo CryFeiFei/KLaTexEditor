@@ -12,21 +12,21 @@ KSubMainWidget::KSubMainWidget(QWidget *parent) :
 {
 	ui->setupUi(this);
 	m_webView = new QWebEngineView(this);
-	ui->webMainLayout->addWidget(m_webView);
-	ui->webMainLayout->setMargin(0);
+	ui->webMainLayout->addWidget(m_webView, 0, 0);
 
-	QFile file(":/html/resource/latex.html");
 	m_webView->load(QUrl("qrc:/html/resource/katex.html"));
 
 
 	m_mathjaxView = new QWebEngineView(this);
-	ui->webMainLayout->addWidget(m_mathjaxView);
+	ui->webMainLayout->addWidget(m_mathjaxView, 0, 1);
 	m_mathjaxView->load(QUrl("qrc:/html/resource/mathjax.html"));
 
 	m_refershTimer = new QTimer(this);
 	connect(ui->textEdit, SIGNAL(textChanged()), SLOT(refershStart()));
 	connect(m_refershTimer, SIGNAL(timeout()), this, SLOT(refershFormula()));
 	connect(m_refershTimer, SIGNAL(timeout()), this, SLOT(referMathJax()));
+
+	ui->webMainLayout->setMargin(0);
 }
 
 KSubMainWidget::~KSubMainWidget()
