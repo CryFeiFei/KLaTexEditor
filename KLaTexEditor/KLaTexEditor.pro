@@ -8,7 +8,7 @@ QT       += core gui
 
 QT += webenginewidgets
 #x11 support
-QT += x11extras
+unix:QT += x11extras
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
