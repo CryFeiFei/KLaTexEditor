@@ -23,6 +23,12 @@ public slots:
 	void refershStart();
 	void referMathJax();
 
+signals:
+	void updateFormula(QString);
+
+private:
+	QString _dealLatexString(QString& strLatex);
+
 private:
 	QTimer* m_refershTimer;
 	Ui::KSubMainWidget *ui;

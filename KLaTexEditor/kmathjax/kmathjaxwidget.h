@@ -1,14 +1,14 @@
-#ifndef KKATEXWIDGET_H
-#define KKATEXWIDGET_H
+#ifndef KMATHJAXWIDGET_H
+#define KMATHJAXWIDGET_H
 
 #include <QWidget>
 #include <QtWebEngineWidgets/QWebEngineView>
 
-class KKatexWidget : public QWidget
+class KMathJaxWidget : public QWidget
 {
 	Q_OBJECT
 public:
-	explicit KKatexWidget(QWidget *parent = nullptr);
+	explicit KMathJaxWidget(QWidget *parent = nullptr);
 
 signals:
 
@@ -16,9 +16,8 @@ public slots:
 	void updateWebView(QString);
 
 private:
-	// doushi out line zanshi todo
 	QWebEngineView* m_inlineView;
 	QWebEngineView* m_outlineView;
 };
 
-#endif // KKATEXWIDGET_H
+#endif // KMATHJAXWIDGET_H
