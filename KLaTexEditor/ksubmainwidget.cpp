@@ -14,28 +14,19 @@ KSubMainWidget::KSubMainWidget(QWidget *parent) :
 	ui(new Ui::KSubMainWidget)
 {
 	ui->setupUi(this);
-//	m_webView = new QWebEngineView(this);
-//	ui->webMainLayout->addWidget(m_webView, 0, 0);
-//	ui->katexLayout->addWidget(m_webView);
-//	m_webView->load(QUrl("qrc:/html/resource/katex.html"));
-	KKatexWidget* katexWidget = new KKatexWidget(this);
-	ui->katexLayout->addWidget(katexWidget);
+	m_katexWidget = new KKatexWidget(this);
+	ui->katexLayout->addWidget(m_katexWidget);
 
-	KMathJaxWidget* kmathjaxWidget = new KMathJaxWidget(this);
-	ui->mathjaxLayout->addWidget(kmathjaxWidget);
-//	m_mathjaxView = new QWebEngineView(this);
-//	ui->webMainLayout->addWidget(m_mathjaxView, 0, 1);
-//	m_mathjaxView->load(QUrl("qrc:/html/resource/mathjax.html"));
-//	ui->mathjaxLayout->addWidget(m_mathjaxView);
-//	m_mathjaxView->setVisible(false);
+	m_mathjaxWidget = new KMathJaxWidget(this);
+	ui->mathjaxLayout->addWidget(m_mathjaxWidget);
 
 	m_refershTimer = new QTimer(this);
 	connect(ui->textEdit, SIGNAL(textChanged()), SLOT(refershStart()));
 	connect(m_refershTimer, SIGNAL(timeout()), this, SLOT(refershFormula()));
 	connect(m_refershTimer, SIGNAL(timeout()), this, SLOT(referMathJax()));
 
-	connect(this, SIGNAL(updateFormula(QString)), katexWidget, SLOT(updateWebView(QString)));
-	connect(this, SIGNAL(updateFormula(QString)), kmathjaxWidget, SLOT(updateWebView(QString)));
+	connect(this, SIGNAL(updateFormula(QString)), m_katexWidget, SLOT(updateWebView(QString)));
+	connect(this, SIGNAL(updateFormula(QString)), m_mathjaxWidget, SLOT(updateWebView(QString)));
 
 	ui->webMainLayout->setMargin(0);
 }

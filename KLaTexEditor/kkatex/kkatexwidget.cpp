@@ -10,7 +10,7 @@ KKatexWidget::KKatexWidget(QWidget *parent) : QWidget(parent)
 
 	QLabel* label = new QLabel(this);
 	label->setText("katex");
-	label->setFixedHeight(KStyle::dpiScale(15));
+	label->setFixedHeight(KStyle::dpiScale(20));
 
 	m_inlineView = new QWebEngineView(this);
 	m_outlineView = new QWebEngineView(this);
@@ -31,7 +31,7 @@ KKatexWidget::KKatexWidget(QWidget *parent) : QWidget(parent)
 	mainLayout->addWidget(toolWidget);
 
 	mainLayout->setMargin(0);
-	mainLayout->setSpacing(0);
+	mainLayout->setSpacing(1);
 
 }
 

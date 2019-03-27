@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QWebEngineView>
 class QTimer;
+class KKatexWidget;
+class KMathJaxWidget;
 
 
 namespace Ui {
@@ -33,8 +35,8 @@ private:
 	QTimer* m_refershTimer;
 	Ui::KSubMainWidget *ui;
 	QString m_strFormula;
-	QWebEngineView* m_webView;
-	QWebEngineView* m_mathjaxView;
+	KKatexWidget* m_katexWidget;
+	KMathJaxWidget* m_mathjaxWidget;
 };
 
 #endif // KSUBMAINWIDGET_H
