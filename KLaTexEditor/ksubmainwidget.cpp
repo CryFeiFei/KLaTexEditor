@@ -6,20 +6,25 @@
 #include <QTimer>
 #include <QtWebEngineWidgets/QWebEngineView>
 
+#include "kkatex/kkatexwidget.h"
+
 KSubMainWidget::KSubMainWidget(QWidget *parent) :
 	QWidget(parent),
 	ui(new Ui::KSubMainWidget)
 {
 	ui->setupUi(this);
-	m_webView = new QWebEngineView(this);
-	ui->webMainLayout->addWidget(m_webView, 0, 0);
-
-	m_webView->load(QUrl("qrc:/html/resource/katex.html"));
-
+//	m_webView = new QWebEngineView(this);
+//	ui->webMainLayout->addWidget(m_webView, 0, 0);
+//	ui->katexLayout->addWidget(m_webView);
+//	m_webView->load(QUrl("qrc:/html/resource/katex.html"));
+	KKatexWidget* katexWidget = new KKatexWidget(this);
+	ui->webMainLayout->addWidget(katexWidget);
 
 	m_mathjaxView = new QWebEngineView(this);
-	ui->webMainLayout->addWidget(m_mathjaxView, 0, 1);
+//	ui->webMainLayout->addWidget(m_mathjaxView, 0, 1);
 	m_mathjaxView->load(QUrl("qrc:/html/resource/mathjax.html"));
+	ui->mathjaxLayout->addWidget(m_mathjaxView);
+//	m_mathjaxView->setVisible(false);
 
 	m_refershTimer = new QTimer(this);
 	connect(ui->textEdit, SIGNAL(textChanged()), SLOT(refershStart()));

@@ -24,7 +24,7 @@
          <height>120</height>
         </size>
        </property>
-       <layout class="QGridLayout" name="gridLayout_2">
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
         <property name="leftMargin">
          <number>0</number>
         </property>
@@ -37,8 +37,15 @@
         <property name="bottomMargin">
          <number>0</number>
         </property>
-        <item row="0" column="0">
-         <layout class="QGridLayout" name="webMainLayout"/>
+        <item>
+         <layout class="QHBoxLayout" name="webMainLayout">
+          <item>
+           <layout class="QVBoxLayout" name="katexLayout"/>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="mathjaxLayout"/>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>

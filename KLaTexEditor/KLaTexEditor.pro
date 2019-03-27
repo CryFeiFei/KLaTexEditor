@@ -38,7 +38,8 @@ SOURCES += \
     ksubmainwidget.cpp \
     krbtoolbar/krbtabbar.cpp \
     krbtoolbar/krbtoolbar.cpp \
-    krbtoolbar/krbbuttongroup.cpp
+    krbtoolbar/krbbuttongroup.cpp \
+    kkatex/kkatexwidget.cpp
 
 HEADERS += \
     kmainwidget.h \
@@ -47,7 +48,8 @@ HEADERS += \
     krbtoolbar/krbtabbar.h \
     krbtoolbar/krbtoolbar.h \
     kglobal.h \
-    krbtoolbar/krbbuttongroup.h
+    krbtoolbar/krbbuttongroup.h \
+    kkatex/kkatexwidget.h
 
 FORMS += \
     ktitlewidget.ui \
