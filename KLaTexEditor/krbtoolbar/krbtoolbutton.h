@@ -5,8 +5,10 @@
 
 class KRbToolButton : public QToolButton
 {
+	Q_OBJECT
 public:
-	KRbToolButton();
+	KRbToolButton(QWidget *parent = nullptr);
+	~KRbToolButton();
 };
 
 #endif // KRBTOOLBUTTON_H
