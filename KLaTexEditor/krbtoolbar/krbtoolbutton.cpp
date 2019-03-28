@@ -12,3 +12,13 @@ KRbToolButton::~KRbToolButton()
 {
 
 }
+//////////////////////////////////////
+KRbCheckBox::KRbCheckBox(QWidget *parent) : QCheckBox(parent)
+{
+	setObjectName("KRbCheckBox");
+	setFixedSize(KStyle::dpiScale(70), KStyle::dpiScale(30));
+}
+KRbCheckBox::~KRbCheckBox()
+{
+
+}

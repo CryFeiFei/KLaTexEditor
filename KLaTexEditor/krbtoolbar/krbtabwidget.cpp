@@ -50,3 +50,18 @@ void KRbStartTabWidget::init()
 	saveButton->setGeometry(KStyle::dpiScale(37), 0, KStyle::dpiScale(35), KStyle::dpiScale(60));
 
 }
+
+////////////////////////////////////////////////
+void KRbViewTabWidget::init()
+{
+	QString strButtonStyleSheet = QString("QToolButton{border:none;color:rgb(0, 0, 0);}"
+										  "QToolButton:hover{background-color: rgb(220, 220, 220);border:none;color:rgb(82, 139, 139);}"
+										  "QToolButton:pressed{background-color: rgb(180, 180, 180);border:none;color:rgb(0, 0, 0);}");
+	KRbToolButton* formula = new KRbToolButton(this);
+	formula->setObjectName("formula");
+	formula->setText("formula");
+	formula->setStyleSheet(strButtonStyleSheet);
+	//openButton->setIcon();
+	formula->setGeometry(KStyle::dpiScale(2), 0, KStyle::dpiScale(35), KStyle::dpiScale(60));
+
+}

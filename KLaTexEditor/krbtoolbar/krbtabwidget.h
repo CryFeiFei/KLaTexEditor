@@ -33,5 +33,13 @@ public:
 	virtual void init();
 
 };
+///////////////////////////////////////////
+class KRbViewTabWidget : public KRbTabWidget
+{
+	Q_OBJECT
+public:
+	using KRbTabWidget::KRbTabWidget;
+	virtual void init();
+};
 
 #endif // KRBTABWIDGET_H
