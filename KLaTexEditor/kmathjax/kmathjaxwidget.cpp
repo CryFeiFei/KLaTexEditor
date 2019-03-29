@@ -23,7 +23,7 @@ KMathJaxWidget::KMathJaxWidget(QWidget *parent) : QWidget(parent)
 	toolWidget->setStyleSheet("background-color:red;");
 	toolWidget->setFixedHeight(KStyle::dpiScale(30));
 
-
+	this->setMinimumWidth(KStyle::dpiScale(380));
 	mainLayout->addWidget(label);
 	mainLayout->addWidget(m_inlineView);
 	mainLayout->addWidget(m_outlineView);

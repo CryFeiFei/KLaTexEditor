@@ -27,10 +27,13 @@ KRbToolBar::KRbToolBar(QWidget *parent) : QWidget(parent)
 	startTabWidget->setStyleSheet("background-color:white;");
 //	QWidget* startWidget = new QWidget(this);
 //	startWidget->setStyleSheet("background-color:white;");
-	QWidget* viewWidget = new QWidget(this);
-	viewWidget->setStyleSheet("background-color:red;");
+
+	KRbViewTabWidget* viewTabWidget = new KRbViewTabWidget(this);
+	viewTabWidget->init();
+//	QWidget* viewWidget = new QWidget(this);
+//	viewWidget->setStyleSheet("background-color:red;");
 	m_rbTabWidget->addWidget(startTabWidget);
-	m_rbTabWidget->addWidget(viewWidget);
+	m_rbTabWidget->addWidget(viewTabWidget);
 
 	connect(m_rbTabBar, SIGNAL(tabChanged(int)), m_rbTabWidget, SLOT(setCurrentIndex(int)));
 

@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QTimer>
 #include <QtWebEngineWidgets/QWebEngineView>
+#include "kglobal.h"
 
 #include "kkatex/kkatexwidget.h"
 #include "kmathjax/kmathjaxwidget.h"
@@ -28,6 +29,7 @@ KSubMainWidget::KSubMainWidget(QWidget *parent) :
 	connect(this, SIGNAL(updateFormula(QString)), m_katexWidget, SLOT(updateWebView(QString)));
 	connect(this, SIGNAL(updateFormula(QString)), m_mathjaxWidget, SLOT(updateWebView(QString)));
 
+	setMinimumWidth(KStyle::dpiScale(800));
 	ui->webMainLayout->setMargin(0);
 }
 

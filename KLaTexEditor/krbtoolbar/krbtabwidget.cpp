@@ -40,14 +40,16 @@ void KRbStartTabWidget::init()
 	openButton->setObjectName("open");
 	openButton->setText("open");
 	openButton->setStyleSheet(strButtonStyleSheet);
+	int nOpenButtonWidth = openButton->sizeHint().width();
 	//openButton->setIcon();
-	openButton->setGeometry(KStyle::dpiScale(2), 0, KStyle::dpiScale(35), KStyle::dpiScale(60));
+	openButton->setGeometry(KStyle::dpiScale(2), 0, KStyle::dpiScale(nOpenButtonWidth), KStyle::dpiScale(60));
 
 	KRbToolButton* saveButton = new KRbToolButton(this);
 	saveButton->setObjectName("save");
 	saveButton->setText("save");
 	saveButton->setStyleSheet(strButtonStyleSheet);
-	saveButton->setGeometry(KStyle::dpiScale(37), 0, KStyle::dpiScale(35), KStyle::dpiScale(60));
+	int nSaveButtonWidth = saveButton->sizeHint().width();
+	saveButton->setGeometry(KStyle::dpiScale(2 + nOpenButtonWidth), 0, KStyle::dpiScale(nSaveButtonWidth), KStyle::dpiScale(60));
 
 }
 
@@ -62,6 +64,16 @@ void KRbViewTabWidget::init()
 	formula->setText("formula");
 	formula->setStyleSheet(strButtonStyleSheet);
 	//openButton->setIcon();
-	formula->setGeometry(KStyle::dpiScale(2), 0, KStyle::dpiScale(35), KStyle::dpiScale(60));
+	int nFormulaWidth = formula->sizeHint().width();
+	formula->setGeometry(KStyle::dpiScale(2), 0, KStyle::dpiScale(nFormulaWidth), KStyle::dpiScale(60));
 
+	KRbCheckBox* katexinline = new KRbCheckBox(this);
+	katexinline->setObjectName("katexinline");
+	katexinline->setText("katexinline");
+	katexinline->setGeometry(KStyle::dpiScale(2 + 2 + nFormulaWidth), 0, KStyle::dpiScale(90), KStyle::dpiScale(30));
+
+	KRbCheckBox* katexoutline = new KRbCheckBox(this);
+	katexoutline->setObjectName("katexoutline");
+	katexoutline->setText("katexoutline");
+	katexoutline->setGeometry(KStyle::dpiScale(2 + 2 + nFormulaWidth), KStyle::dpiScale(30), KStyle::dpiScale(90), KStyle::dpiScale(30));
 }

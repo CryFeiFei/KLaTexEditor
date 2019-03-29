@@ -11,6 +11,7 @@ class KRbToolButton : public QToolButton
 public:
 	KRbToolButton(QWidget *parent = nullptr);
 	~KRbToolButton();
+	QSize sizeHint() const;
 };
 
 class KRbCheckBox : public QCheckBox
