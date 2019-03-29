@@ -19,6 +19,10 @@ KMathJaxWidget::KMathJaxWidget(QWidget *parent) : QWidget(parent)
 
 	m_inlineView->setMinimumSize(KStyle::dpiScale(380), KStyle::dpiScale(120));
 	m_outlineView->setMinimumSize(KStyle::dpiScale(380), KStyle::dpiScale(120));
+	m_inlineView->setEnabled(false);
+	m_outlineView->setEnabled(false);
+	m_inlineView->setContextMenuPolicy(Qt::NoContextMenu);
+	m_outlineView->setContextMenuPolicy(Qt::NoContextMenu);
 	QWidget* toolWidget = new QWidget(this);
 	toolWidget->setStyleSheet("background-color:red;");
 	toolWidget->setFixedHeight(KStyle::dpiScale(30));
