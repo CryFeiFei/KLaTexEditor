@@ -1,11 +1,12 @@
-#ifndef KGLOBAL_H
+﻿#ifndef KGLOBAL_H
 #define KGLOBAL_H
 
 #include <QObject>
 #ifdef Q_OS_UNIX
 #include <QtX11Extras/QX11Info>
 #endif
-
+#include <QtCore>
+#include <QtGui>
 #ifdef QT_DEBUG
 #include <QDebug>
 #endif

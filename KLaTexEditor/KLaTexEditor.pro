@@ -42,7 +42,8 @@ SOURCES += \
     kkatex/kkatexwidget.cpp \
     kmathjax/kmathjaxwidget.cpp \
     krbtoolbar/krbtoolbutton.cpp \
-    krbtoolbar/krbtabwidget.cpp
+    krbtoolbar/krbtabwidget.cpp \
+    kwebtoolwidget.cpp
 
 HEADERS += \
     kmainwidget.h \
@@ -55,7 +56,8 @@ HEADERS += \
     kkatex/kkatexwidget.h \
     kmathjax/kmathjaxwidget.h \
     krbtoolbar/krbtoolbutton.h \
-    krbtoolbar/krbtabwidget.h
+    krbtoolbar/krbtabwidget.h \
+    kwebtoolwidget.h
 
 FORMS += \
     ktitlewidget.ui \
