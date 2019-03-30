@@ -10,6 +10,15 @@
 //add copy save tool widget
 // inset outset
 
+class KWebToolButton : public QWidget
+{
+	Q_OBJECT
+public:
+	using QWidget :: QWidget;
+	explicit KWebToolButton(QWidget* parent = nullptr);
+	~KWebToolButton();
+};
+
 class KWebToolWidget : public QWidget
 {
 	Q_OBJECT

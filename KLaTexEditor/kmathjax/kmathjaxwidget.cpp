@@ -1,4 +1,4 @@
-#include "kmathjaxwidget.h"
+﻿#include "kmathjaxwidget.h"
 #include <QVBoxLayout>
 #include <QLabel>
 #include "kglobal.h"
@@ -35,6 +35,8 @@ KMathJaxWidget::KMathJaxWidget(QWidget *parent) : QWidget(parent)
 
 	mainLayout->setMargin(0);
 	mainLayout->setSpacing(1);
+
+	m_inlineView->setVisible(false);
 
 }
 

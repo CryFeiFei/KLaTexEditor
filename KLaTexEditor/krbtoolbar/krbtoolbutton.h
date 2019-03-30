@@ -24,4 +24,17 @@ public:
 	QSize sizeHint() const;
 };
 
+class KRbSeparatorWidget : public QWidget
+{
+	Q_OBJECT
+public:
+	using QWidget::QWidget;
+	KRbSeparatorWidget(QWidget* parent = nullptr);
+	~KRbSeparatorWidget();
+
+public:
+	void paintEvent(QPaintEvent* ) override;
+};
+
+
 #endif // KRBTOOLBUTTON_H

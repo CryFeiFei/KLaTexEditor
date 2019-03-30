@@ -1,4 +1,4 @@
-#include "kkatexwidget.h"
+﻿#include "kkatexwidget.h"
 #include "kglobal.h"
 #include <QVBoxLayout>
 #include <QLabel>
@@ -37,6 +37,8 @@ KKatexWidget::KKatexWidget(QWidget *parent) : QWidget(parent)
 
 	mainLayout->setMargin(0);
 	mainLayout->setSpacing(1);
+
+	m_inlineView->setVisible(false);
 
 }
 

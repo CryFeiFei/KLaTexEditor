@@ -36,6 +36,7 @@ void KRbStartTabWidget::init()
 	QString strButtonStyleSheet = QString("QToolButton{border:none;color:rgb(0, 0, 0);}"
 										  "QToolButton:hover{background-color: rgb(220, 220, 220);border:none;color:rgb(82, 139, 139);}"
 										  "QToolButton:pressed{background-color: rgb(180, 180, 180);border:none;color:rgb(0, 0, 0);}");
+
 	KRbToolButton* openButton = new KRbToolButton(this);
 	openButton->setObjectName("open");
 	openButton->setText("open");
@@ -104,4 +105,8 @@ void KRbViewTabWidget::init()
 	int nMaxJaxCheckBox = nMathJaxInline > nMathJaxOutline ? nMathJaxInline : nMathJaxOutline;
 	mathJaxInLine->setGeometry(KStyle::dpiScale(nSpace), 0, KStyle::dpiScale(nMaxJaxCheckBox), KStyle::dpiScale(30));
 	mathJaxOutLine->setGeometry(KStyle::dpiScale(nSpace), KStyle::dpiScale(30), KStyle::dpiScale(nMaxJaxCheckBox), KStyle::dpiScale(30));
+
+	nSpace += nMaxJaxCheckBox;
+	KRbSeparatorWidget* spe = new KRbSeparatorWidget(this);
+	spe->setGeometry(KStyle::dpiScale(nSpace), 0, KStyle::dpiScale(7), KStyle::dpiScale(30));
 }
