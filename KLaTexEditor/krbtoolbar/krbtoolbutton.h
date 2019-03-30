@@ -1,4 +1,4 @@
-#ifndef KRBTOOLBUTTON_H
+﻿#ifndef KRBTOOLBUTTON_H
 #define KRBTOOLBUTTON_H
 
 #include <QToolButton>
@@ -21,6 +21,7 @@ public:
 	using QCheckBox::QCheckBox;
 	KRbCheckBox(QWidget *parent = nullptr);
 	~KRbCheckBox();
+	QSize sizeHint() const;
 };
 
 #endif // KRBTOOLBUTTON_H

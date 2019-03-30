@@ -1,4 +1,4 @@
-#include "krbtoolbutton.h"
+﻿#include "krbtoolbutton.h"
 #include "kglobal.h"
 
 KRbToolButton::KRbToolButton(QWidget *parent) : QToolButton(parent)
@@ -26,11 +26,20 @@ QSize KRbToolButton::sizeHint() const
 KRbCheckBox::KRbCheckBox(QWidget *parent) : QCheckBox(parent)
 {
 	setObjectName("KRbCheckBox");
-	setFixedSize(KStyle::dpiScale(90), KStyle::dpiScale(30));
+//	setFixedSize(KStyle::dpiScale(90), KStyle::dpiScale(30));
 }
 KRbCheckBox::~KRbCheckBox()
 {
 
+}
+
+QSize KRbCheckBox::sizeHint() const
+{
+	QFontMetrics fm(font());
+	QRect sz = fm.boundingRect(text());
+	int nWidth = sz.width() > 100 ?
+				sz.width() : 100;
+	return QSize(nWidth, 30);
 }
 
 

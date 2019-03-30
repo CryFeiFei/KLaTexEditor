@@ -6,6 +6,10 @@
 
 #include <QWidget>
 
+//add color select widget
+//add copy save tool widget
+// inset outset
+
 class KWebToolWidget : public QWidget
 {
 	Q_OBJECT

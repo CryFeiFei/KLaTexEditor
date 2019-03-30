@@ -1,4 +1,4 @@
-#include "krbtabwidget.h"
+﻿#include "krbtabwidget.h"
 #include "kglobal.h"
 #include <QHBoxLayout>
 #include "krbtoolbutton.h"
@@ -54,26 +54,54 @@ void KRbStartTabWidget::init()
 }
 
 ////////////////////////////////////////////////
+/// \brief KRbViewTabWidget::init
+///
+#define STARTSPACE 2
+#define NORMALSPACE 4
 void KRbViewTabWidget::init()
 {
+	//todo 这里应该改成自定义layout + groupBox 这么写太挫了
 	QString strButtonStyleSheet = QString("QToolButton{border:none;color:rgb(0, 0, 0);}"
 										  "QToolButton:hover{background-color: rgb(220, 220, 220);border:none;color:rgb(82, 139, 139);}"
 										  "QToolButton:pressed{background-color: rgb(180, 180, 180);border:none;color:rgb(0, 0, 0);}");
+	int nSpace = STARTSPACE;
 	KRbToolButton* formula = new KRbToolButton(this);
 	formula->setObjectName("formula");
 	formula->setText("formula");
 	formula->setStyleSheet(strButtonStyleSheet);
 	//openButton->setIcon();
 	int nFormulaWidth = formula->sizeHint().width();
-	formula->setGeometry(KStyle::dpiScale(2), 0, KStyle::dpiScale(nFormulaWidth), KStyle::dpiScale(60));
+	formula->setGeometry(KStyle::dpiScale(nSpace), 0, KStyle::dpiScale(nFormulaWidth), KStyle::dpiScale(60));
 
-	KRbCheckBox* katexinline = new KRbCheckBox(this);
-	katexinline->setObjectName("katexinline");
-	katexinline->setText("katexinline");
-	katexinline->setGeometry(KStyle::dpiScale(2 + 2 + nFormulaWidth), 0, KStyle::dpiScale(90), KStyle::dpiScale(30));
+	// ---------------------katex group
+	nSpace += NORMALSPACE + nFormulaWidth;
+	KRbCheckBox* katexInline = new KRbCheckBox(this);
+	katexInline->setObjectName("KatexInlineCheckBox");
+	katexInline->setText("KatexInline");
+	int nKatexInline = katexInline->sizeHint().width();
 
-	KRbCheckBox* katexoutline = new KRbCheckBox(this);
-	katexoutline->setObjectName("katexoutline");
-	katexoutline->setText("katexoutline");
-	katexoutline->setGeometry(KStyle::dpiScale(2 + 2 + nFormulaWidth), KStyle::dpiScale(30), KStyle::dpiScale(90), KStyle::dpiScale(30));
+	KRbCheckBox* katexOutline = new KRbCheckBox(this);
+	katexOutline->setObjectName("KatexOutlineCheckBox");
+	katexOutline->setText("KatexOutline");
+	int nKatexOutline = katexOutline->sizeHint().width();
+
+	int nMaxKatexCbWidth = nKatexInline > nKatexOutline ? nKatexInline : nKatexOutline;
+	katexInline->setGeometry(KStyle::dpiScale(nSpace), 0, KStyle::dpiScale(nMaxKatexCbWidth), KStyle::dpiScale(30));
+	katexOutline->setGeometry(KStyle::dpiScale(nSpace), KStyle::dpiScale(30), KStyle::dpiScale(nMaxKatexCbWidth), KStyle::dpiScale(30));
+
+	//------------------------mathjax group
+	nSpace += NORMALSPACE + nMaxKatexCbWidth;
+
+	KRbCheckBox* mathJaxInLine = new KRbCheckBox(this);
+	mathJaxInLine->setObjectName("MathJaxInlineCheckbox");
+	mathJaxInLine->setText("MathJaxInline");
+	int nMathJaxInline = mathJaxInLine->sizeHint().width();
+	KRbCheckBox* mathJaxOutLine = new KRbCheckBox(this);
+	mathJaxOutLine->setObjectName("MathJaxOutlineCheckbox");
+	mathJaxOutLine->setText("MathJaxOutline");
+	int nMathJaxOutline = mathJaxOutLine->sizeHint().width();
+
+	int nMaxJaxCheckBox = nMathJaxInline > nMathJaxOutline ? nMathJaxInline : nMathJaxOutline;
+	mathJaxInLine->setGeometry(KStyle::dpiScale(nSpace), 0, KStyle::dpiScale(nMaxJaxCheckBox), KStyle::dpiScale(30));
+	mathJaxOutLine->setGeometry(KStyle::dpiScale(nSpace), KStyle::dpiScale(30), KStyle::dpiScale(nMaxJaxCheckBox), KStyle::dpiScale(30));
 }
