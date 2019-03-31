@@ -3,7 +3,7 @@
 #include <QHBoxLayout>
 
 ///////////////////////////////////////////////////
-KWebToolButton::KWebToolButton(QWidget* parent) : QWidget(parent)
+KWebToolButton::KWebToolButton(QWidget* parent) : QPushButton(parent)
 {
 	setObjectName("KWebToolButton");
 }

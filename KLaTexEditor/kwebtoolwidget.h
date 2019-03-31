@@ -5,16 +5,17 @@
 #define KWEBTOOLWIDGET_H
 
 #include <QWidget>
+#include <QPushButton>
 
 //add color select widget
 //add copy save tool widget
 // inset outset
 
-class KWebToolButton : public QWidget
+class KWebToolButton : public QPushButton
 {
 	Q_OBJECT
 public:
-	using QWidget :: QWidget;
+	using QPushButton :: QPushButton;
 	explicit KWebToolButton(QWidget* parent = nullptr);
 	~KWebToolButton();
 };
