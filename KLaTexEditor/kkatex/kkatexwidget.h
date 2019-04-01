@@ -17,8 +17,7 @@ public slots:
 
 private:
 	// doushi out line zanshi todo
-	QWebEngineView* m_inlineView;
-	QWebEngineView* m_outlineView;
+	QWebEngineView* m_webView;
 };
 
 #endif // KKATEXWIDGET_H

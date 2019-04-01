@@ -16,8 +16,7 @@ public slots:
 	void updateWebView(QString);
 
 private:
-	QWebEngineView* m_inlineView;
-	QWebEngineView* m_outlineView;
+	QWebEngineView* m_webView;
 };
 
 #endif // KMATHJAXWIDGET_H
