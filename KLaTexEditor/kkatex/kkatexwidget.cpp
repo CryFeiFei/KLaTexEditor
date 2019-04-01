@@ -4,6 +4,8 @@
 #include <QLabel>
 #include <QSplitter>
 
+#include "kwebtoolwidget.h"
+
 KKatexWidget::KKatexWidget(QWidget *parent) : QWidget(parent)
 {
 	QVBoxLayout* mainLayout = new QVBoxLayout(this);
@@ -17,14 +19,15 @@ KKatexWidget::KKatexWidget(QWidget *parent) : QWidget(parent)
 	m_webView->setContextMenuPolicy(Qt::NoContextMenu);
 
 	m_webView->setMinimumSize(KStyle::dpiScale(380), KStyle::dpiScale(120));
-	QWidget* toolWidget = new QWidget(this);
-	toolWidget->setStyleSheet("background-color:red;");
-	toolWidget->setFixedHeight(KStyle::dpiScale(30));
+
+	KWebToolWidget* webToolWidget = new KWebToolWidget(this);
+	webToolWidget->setStyleSheet("background-color:red;");
+	webToolWidget->setFixedHeight(KStyle::dpiScale(30));
 
 	this->setMinimumWidth(KStyle::dpiScale(380));
 	mainLayout->addWidget(label);
 	mainLayout->addWidget(m_webView);
-	mainLayout->addWidget(toolWidget);
+	mainLayout->addWidget(webToolWidget);
 
 	mainLayout->setMargin(0);
 	mainLayout->setSpacing(1);
