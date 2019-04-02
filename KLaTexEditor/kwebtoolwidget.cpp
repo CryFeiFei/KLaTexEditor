@@ -17,14 +17,27 @@ KWebToolWidget::KWebToolWidget(QWidget *parent) : QWidget(parent)
 {
 	QHBoxLayout* mainLayout = new QHBoxLayout(this);
 
-	QComboBox* textCb = new QComboBox(this);
-	textCb->setFixedWidth(KStyle::dpiScale(60));
+	QString strComboxStyleSheet = QString("QComboBox::drop-down{"
+										  "border-style: none;}");
+	QComboBox* textColorCb = new QComboBox(this);
+	textColorCb->setFixedSize(KStyle::dpiScale(60), KStyle::dpiScale(30));
+	textColorCb->setStyleSheet(strComboxStyleSheet);
+	textColorCb->addItem("TextColor");
+
 	QComboBox* bgCb = new QComboBox(this);
-	bgCb->setFixedWidth(KStyle::dpiScale(60));
+	bgCb->setFixedSize(KStyle::dpiScale(60), KStyle::dpiScale(30));
+	bgCb->setStyleSheet(strComboxStyleSheet);
+	bgCb->addItem("BGColor");
+
 	QComboBox* fontSizeCb = new QComboBox(this);
-	fontSizeCb->setFixedWidth(KStyle::dpiScale(60));
+	fontSizeCb->setFixedSize(KStyle::dpiScale(60), KStyle::dpiScale(30));
+	fontSizeCb->setStyleSheet(strComboxStyleSheet);
+	fontSizeCb->addItem("FontSize");
+
 	QComboBox* fontType = new QComboBox(this);
-	fontType->setFixedWidth(KStyle::dpiScale(60));
+	fontType->setFixedSize(KStyle::dpiScale(60), KStyle::dpiScale(30));
+	fontType->setStyleSheet(strComboxStyleSheet);
+	fontType->addItem("FontType");
 
 	QPushButton* copyButton = new QPushButton(this);
 	QString strButtonStyleSheet = QString("\
@@ -42,7 +55,7 @@ KWebToolWidget::KWebToolWidget(QWidget *parent) : QWidget(parent)
 	saveAsButton->setFixedSize(KStyle::dpiScale(60), KStyle::dpiScale(30));
 	saveAsButton->setStyleSheet(strButtonStyleSheet);
 
-	mainLayout->addWidget(textCb);
+	mainLayout->addWidget(textColorCb);
 	mainLayout->addWidget(bgCb);
 	mainLayout->addWidget(fontSizeCb);
 	mainLayout->addWidget(fontType);

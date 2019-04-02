@@ -21,7 +21,7 @@ KKatexWidget::KKatexWidget(QWidget *parent) : QWidget(parent)
 	m_webView->setMinimumSize(KStyle::dpiScale(380), KStyle::dpiScale(120));
 
 	KWebToolWidget* webToolWidget = new KWebToolWidget(this);
-	webToolWidget->setStyleSheet("background-color:red;");
+	webToolWidget->setStyleSheet("background-color:gray;");
 	webToolWidget->setFixedHeight(KStyle::dpiScale(30));
 
 	this->setMinimumWidth(KStyle::dpiScale(380));

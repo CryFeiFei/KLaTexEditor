@@ -37,16 +37,6 @@
         <property name="bottomMargin">
          <number>0</number>
         </property>
-        <item>
-         <layout class="QHBoxLayout" name="webMainLayout">
-          <item>
-           <layout class="QVBoxLayout" name="katexLayout"/>
-          </item>
-          <item>
-           <layout class="QVBoxLayout" name="mathjaxLayout"/>
-          </item>
-         </layout>
-        </item>
        </layout>
       </widget>
      </item>

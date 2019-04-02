@@ -4,6 +4,7 @@
 #include <QTextStream>
 #include <QDebug>
 #include <QTimer>
+#include <QSplitter>
 #include <QtWebEngineWidgets/QWebEngineView>
 #include "kglobal.h"
 
@@ -16,10 +17,20 @@ KSubMainWidget::KSubMainWidget(QWidget *parent) :
 {
 	ui->setupUi(this);
 	m_katexWidget = new KKatexWidget(this);
-	ui->katexLayout->addWidget(m_katexWidget);
-
+//	ui->katexLayout->addWidget(m_katexWidget);
 	m_mathjaxWidget = new KMathJaxWidget(this);
-	ui->mathjaxLayout->addWidget(m_mathjaxWidget);
+//	ui->mathjaxLayout->addWidget(m_mathjaxWidget);
+
+	QSplitter* webSplitter = new QSplitter(ui->webWidget);
+	webSplitter->addWidget(m_katexWidget);
+	webSplitter->addWidget(m_mathjaxWidget);
+
+	ui->webWidget->layout()->addWidget(webSplitter);
+
+	QSplitter* mainSplitter = new QSplitter(Qt::Vertical, this);
+	mainSplitter->addWidget(ui->webWidget);
+	mainSplitter->addWidget(ui->textEdit);
+	ui->verticalLayout->addWidget(mainSplitter);
 
 	m_refershTimer = new QTimer(this);
 	connect(ui->textEdit, SIGNAL(textChanged()), SLOT(refershStart()));
@@ -30,7 +41,7 @@ KSubMainWidget::KSubMainWidget(QWidget *parent) :
 	connect(this, SIGNAL(updateFormula(QString)), m_mathjaxWidget, SLOT(updateWebView(QString)));
 
 	setMinimumWidth(KStyle::dpiScale(800));
-	ui->webMainLayout->setMargin(0);
+//	ui->webMainLayout->setMargin(0);
 }
 
 KSubMainWidget::~KSubMainWidget()

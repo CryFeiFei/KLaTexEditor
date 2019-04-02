@@ -2,6 +2,7 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include "kglobal.h"
+#include "kwebtoolwidget.h"
 
 KMathJaxWidget::KMathJaxWidget(QWidget *parent) : QWidget(parent)
 {
@@ -18,14 +19,15 @@ KMathJaxWidget::KMathJaxWidget(QWidget *parent) : QWidget(parent)
 	m_webView->setMinimumSize(KStyle::dpiScale(380), KStyle::dpiScale(120));
 	m_webView->setEnabled(false);
 	m_webView->setContextMenuPolicy(Qt::NoContextMenu);
-	QWidget* toolWidget = new QWidget(this);
-	toolWidget->setStyleSheet("background-color:red;");
-	toolWidget->setFixedHeight(KStyle::dpiScale(30));
+
+	KWebToolWidget* webToolWidget = new KWebToolWidget(this);
+	webToolWidget->setStyleSheet("background-color:gray;");
+	webToolWidget->setFixedHeight(KStyle::dpiScale(30));
 
 	this->setMinimumWidth(KStyle::dpiScale(380));
 	mainLayout->addWidget(label);
 	mainLayout->addWidget(m_webView);
-	mainLayout->addWidget(toolWidget);
+	mainLayout->addWidget(webToolWidget);
 
 	mainLayout->setMargin(0);
 	mainLayout->setSpacing(1);
