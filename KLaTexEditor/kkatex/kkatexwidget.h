@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QtWebEngineWidgets/QWebEngineView>
+#include <QTextEdit>
 
 class KKatexWidget : public QWidget
 {
@@ -15,9 +16,19 @@ signals:
 public slots:
 	void updateWebView(QString);
 
+public slots:
+	void refershFormula();
+	void refershStart();
+
+private:
+	QString _dealLatexString(QString &);
+
 private:
 	// doushi out line zanshi todo
 	QWebEngineView* m_webView;
+	QTextEdit* m_textEdit;
+	QTimer* m_refershTimer;
+	QString m_strFormula;
 };
 
 #endif // KKATEXWIDGET_H
