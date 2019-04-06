@@ -1,9 +1,10 @@
-#ifndef KKATEXWIDGET_H
+﻿#ifndef KKATEXWIDGET_H
 #define KKATEXWIDGET_H
 
 #include <QWidget>
 #include <QtWebEngineWidgets/QWebEngineView>
-#include <QTextEdit>
+
+class KFormulaTextEdit;
 
 class KKatexWidget : public QWidget
 {
@@ -26,7 +27,7 @@ private:
 private:
 	// doushi out line zanshi todo
 	QWebEngineView* m_webView;
-	QTextEdit* m_textEdit;
+	KFormulaTextEdit* m_textEdit;
 	QTimer* m_refershTimer;
 	QString m_strFormula;
 };

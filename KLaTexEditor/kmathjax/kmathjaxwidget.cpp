@@ -4,6 +4,7 @@
 #include <QSplitter>
 #include "kglobal.h"
 #include "kwebtoolwidget.h"
+#include "kformulatextedit.h"
 
 KMathJaxWidget::KMathJaxWidget(QWidget *parent) : QWidget(parent)
 {
@@ -25,7 +26,7 @@ KMathJaxWidget::KMathJaxWidget(QWidget *parent) : QWidget(parent)
 	webToolWidget->setStyleSheet("background-color:gray;");
 	webToolWidget->setFixedHeight(KStyle::dpiScale(30));
 
-	m_textEdit = new QTextEdit(this);
+	m_textEdit = new KFormulaTextEdit(this);
 
 	QSplitter* splitter = new QSplitter(Qt::Vertical, this);
 	splitter->addWidget(m_webView);

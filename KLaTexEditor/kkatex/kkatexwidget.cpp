@@ -3,6 +3,7 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QSplitter>
+#include "kformulatextedit.h"
 
 #include "kwebtoolwidget.h"
 
@@ -24,8 +25,7 @@ KKatexWidget::KKatexWidget(QWidget *parent) : QWidget(parent)
 	webToolWidget->setStyleSheet("background-color:gray;");
 	webToolWidget->setFixedHeight(KStyle::dpiScale(30));
 
-	m_textEdit = new QTextEdit(this);
-	m_textEdit->setMinimumHeight(KStyle::dpiScale(60));
+	m_textEdit = new KFormulaTextEdit(this);
 
 	QSplitter* mainSplitter = new QSplitter(Qt::Vertical, this);
 	mainSplitter->addWidget(m_webView);

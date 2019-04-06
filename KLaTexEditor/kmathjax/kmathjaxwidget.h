@@ -1,9 +1,10 @@
-#ifndef KMATHJAXWIDGET_H
+﻿#ifndef KMATHJAXWIDGET_H
 #define KMATHJAXWIDGET_H
 
 #include <QWidget>
 #include <QtWebEngineWidgets/QWebEngineView>
-#include <QTextEdit>
+
+class KFormulaTextEdit;
 
 class KMathJaxWidget : public QWidget
 {
@@ -25,7 +26,7 @@ private:
 
 private:
 	QWebEngineView* m_webView;
-	QTextEdit* m_textEdit;
+	KFormulaTextEdit* m_textEdit;
 	QTimer* m_refershTimer;
 	QString m_strFormula;
 };

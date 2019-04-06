@@ -43,7 +43,9 @@ SOURCES += \
     kmathjax/kmathjaxwidget.cpp \
     krbtoolbar/krbtoolbutton.cpp \
     krbtoolbar/krbtabwidget.cpp \
-    kwebtoolwidget.cpp
+    kwebtoolwidget.cpp \
+    kcore/kwebformulastring.cpp \
+    kformulatextedit.cpp
 
 HEADERS += \
     kmainwidget.h \
@@ -57,7 +59,9 @@ HEADERS += \
     kmathjax/kmathjaxwidget.h \
     krbtoolbar/krbtoolbutton.h \
     krbtoolbar/krbtabwidget.h \
-    kwebtoolwidget.h
+    kwebtoolwidget.h \
+    kcore/kwebformulastring.h \
+    kformulatextedit.h
 
 FORMS += \
     ktitlewidget.ui \
