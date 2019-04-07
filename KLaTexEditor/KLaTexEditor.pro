@@ -10,6 +10,8 @@ QT += webenginewidgets
 #x11 support
 unix:QT += x11extras
 
+QT += svg
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = KLaTexEditor

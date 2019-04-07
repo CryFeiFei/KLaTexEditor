@@ -17,9 +17,7 @@ KSubMainWidget::KSubMainWidget(QWidget *parent) :
 {
 	ui->setupUi(this);
 	m_katexWidget = new KKatexWidget(this);
-//	ui->katexLayout->addWidget(m_katexWidget);
 	m_mathjaxWidget = new KMathJaxWidget(this);
-//	ui->mathjaxLayout->addWidget(m_mathjaxWidget);
 
 	QSplitter* webSplitter = new QSplitter(Qt::Horizontal, ui->webWidget);
 	webSplitter->addWidget(m_katexWidget);
@@ -32,7 +30,6 @@ KSubMainWidget::KSubMainWidget(QWidget *parent) :
 	ui->verticalLayout->addWidget(mainSplitter);
 
 	setMinimumWidth(KStyle::dpiScale(800));
-//	ui->webMainLayout->setMargin(0);
 }
 
 KSubMainWidget::~KSubMainWidget()

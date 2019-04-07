@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QtWebEngineWidgets/QWebEngineView>
+#include <QMenu>
 
 class KFormulaTextEdit;
 
@@ -24,12 +25,17 @@ public slots:
 private:
 	QString _dealLatexString(QString &);
 
+public:
+	void contextMenuEvent(QContextMenuEvent*) override;
+
 private:
 	// doushi out line zanshi todo
 	QWebEngineView* m_webView;
 	KFormulaTextEdit* m_textEdit;
 	QTimer* m_refershTimer;
 	QString m_strFormula;
+
+	QMenu* m_menu;
 };
 
 #endif // KKATEXWIDGET_H

@@ -1,28 +1,5 @@
 ﻿#include "kformulatextedit.h"
 #include <QCompleter>
-
-//KFormulaTextEdit::KFormulaTextEdit(QWidget* parent) : QTextEdit (parent)
-//{
-//	setObjectName("KFormulaTextEdit");
-//	//禁止中文输入法
-//	setAttribute(Qt::WA_InputMethodEnabled, false);
-//	QFont font;
-//	font.setFamily("Source Han Sans");
-//	font.setPointSize(20);
-//	setFont(font);
-//	setAcceptRichText(false);
-
-//	QStringList list;
-//	list<<"start"<<"add"<<"ads";
-//	QCompleter* completer = new QCompleter(list, this);
-//	this->setCom
-//}
-
-//KFormulaTextEdit::~KFormulaTextEdit()
-//{
-
-//}
-#include <QCompleter>
 #include <QKeyEvent>
 #include <QAbstractItemView>
 #include <QtDebug>
@@ -31,15 +8,21 @@
 #include <QAbstractItemModel>
 #include <QScrollBar>
 
+
+QStringList KFormulaTextEdit::m_textCompleter = QStringList(QList<QString>{"qqq", "qsed","daasd"});
+
 KFormulaTextEdit::KFormulaTextEdit(QWidget *parent)
 : QTextEdit(parent), c(nullptr)
 {
-	setPlainText(tr("This KFormulaTextEdit provides autocompletions for words that have more than"
-					" 3 characters. You can trigger autocompletion using ") +
-					QKeySequence("Ctrl+E").toString(QKeySequence::NativeText));
+	setObjectName("KFormulaTextEdit");
+	//禁止中文输入法
+	setAttribute(Qt::WA_InputMethodEnabled, false);
+	QFont font;
+	font.setFamily("Consolas");
+	font.setPointSize(15);
+	setFont(font);
 
-	QCompleter* comP = new QCompleter(QStringList("qqq"), this);
-	setCompleter(comP);
+	setAcceptRichText(false);
 }
 
 KFormulaTextEdit::~KFormulaTextEdit()
@@ -98,17 +81,17 @@ void KFormulaTextEdit::keyPressEvent(QKeyEvent *e)
 {
 	if (c && c->popup()->isVisible()) {
 		// The following keys are forwarded by the completer to the widget
-	   switch (e->key()) {
-	   case Qt::Key_Enter:
-	   case Qt::Key_Return:
-	   case Qt::Key_Escape:
-	   case Qt::Key_Tab:
-	   case Qt::Key_Backtab:
+		switch (e->key()) {
+		case Qt::Key_Enter:
+		case Qt::Key_Return:
+		case Qt::Key_Escape:
+		case Qt::Key_Tab:
+		case Qt::Key_Backtab:
 			e->ignore();
 			return; // let the completer do default behavior
-	   default:
-		   break;
-	   }
+		default:
+			break;
+		}
 	}
 
 	bool isShortcut = ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_E); // CTRL+E

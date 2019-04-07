@@ -7,6 +7,9 @@
 
 #include "kwebtoolwidget.h"
 
+#include <QSvgRenderer>
+#include <QSvgGenerator>
+
 KKatexWidget::KKatexWidget(QWidget *parent) : QWidget(parent)
 {
 	QVBoxLayout* mainLayout = new QVBoxLayout(this);
@@ -44,6 +47,27 @@ KKatexWidget::KKatexWidget(QWidget *parent) : QWidget(parent)
 
 	connect(m_textEdit, SIGNAL(textChanged()), SLOT(refershStart()));
 	connect(m_refershTimer, SIGNAL(timeout()), this, SLOT(refershFormula()));
+
+	m_menu = new QMenu(this);
+	m_menu->addAction(new QAction(tr("&Open"), m_menu));
+	m_menu->addAction(new QAction(tr("&Mark"), m_menu));
+	m_menu->addAction(new QAction(tr("&Quit"), m_menu));
+}
+
+void KKatexWidget::contextMenuEvent(QContextMenuEvent *)
+{
+
+	QSvgGenerator svgg;
+	svgg.setFileName("D:\\q.svg");
+	svgg.setSize(QSize(200, 200));
+	svgg.setViewBox(QRect(0, 0, 200, 200));
+	svgg.setTitle(tr("SVG Generator Example Drawing"));
+	svgg.setDescription(tr("An SVG drawing created by the SVG Generator "
+	"Example provided with Qt."));
+	QPainter pp(&svgg);
+	m_webView->render(&pp);
+	m_menu->move(cursor().pos());
+	m_menu->show();
 }
 
 void KKatexWidget::updateWebView(QString strFormula)

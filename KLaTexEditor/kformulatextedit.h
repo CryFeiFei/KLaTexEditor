@@ -1,16 +1,6 @@
 ﻿#ifndef KFORMULATEXTEDIT_H
 #define KFORMULATEXTEDIT_H
 
-//#include <QTextEdit>
-
-//class KFormulaTextEdit : public QTextEdit
-//{
-//public:
-//	explicit KFormulaTextEdit(QWidget* parent = nullptr);
-//	~KFormulaTextEdit();
-//};
-
-
 #include <QTextEdit>
 
 class QCompleter;
@@ -38,6 +28,7 @@ private:
 
 private:
 	QCompleter *c;
+	static QStringList m_textCompleter;
 };
 
 #endif // KFORMULATEXTEDIT_H

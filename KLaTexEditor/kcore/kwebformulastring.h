@@ -15,8 +15,8 @@ public slots:
 
 private:
 	QString m_formula;
-	QString m_textColor;
-	QString m_bgColor;
+	QString m_textColor; //文本颜色
+	QString m_bgColor; //
 	QString m_fontSize;
 	QString m_fontType;
 };
