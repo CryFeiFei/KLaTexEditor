@@ -47,7 +47,9 @@ SOURCES += \
     krbtoolbar/krbtabwidget.cpp \
     kwebtoolwidget.cpp \
     kcore/kwebformulastring.cpp \
-    kformulatextedit.cpp
+    kformulatextedit.cpp \
+    kcolorlabel.cpp \
+    kcombobox.cpp
 
 HEADERS += \
     kmainwidget.h \
@@ -63,7 +65,9 @@ HEADERS += \
     krbtoolbar/krbtabwidget.h \
     kwebtoolwidget.h \
     kcore/kwebformulastring.h \
-    kformulatextedit.h
+    kformulatextedit.h \
+    kcolorlabel.h \
+    kcombobox.h
 
 FORMS += \
     ktitlewidget.ui \

@@ -2,6 +2,8 @@
 #include "kglobal.h"
 #include <QHBoxLayout>
 #include <QComboBox>
+#include "kcolorlabel.h"
+#include "kcombobox.h"
 
 ///////////////////////////////////////////////////
 KWebToolButton::KWebToolButton(QWidget* parent) : QPushButton(parent)
@@ -17,27 +19,21 @@ KWebToolWidget::KWebToolWidget(QWidget *parent) : QWidget(parent)
 {
 	QHBoxLayout* mainLayout = new QHBoxLayout(this);
 
-	QString strComboxStyleSheet = QString("QComboBox::drop-down{"
-										  "border-style: none;}");
-	QComboBox* textColorCb = new QComboBox(this);
-	textColorCb->setFixedSize(KStyle::dpiScale(60), KStyle::dpiScale(30));
-	textColorCb->setStyleSheet(strComboxStyleSheet);
-	textColorCb->addItem("TextColor");
+	KColorLabel* textColorLabel = new KColorLabel(this);
+	textColorLabel->setObjectName("TextColorLabel");
+	textColorLabel->setToolTipPrefix(QObject::tr("TextColor"));
 
-	QComboBox* bgCb = new QComboBox(this);
-	bgCb->setFixedSize(KStyle::dpiScale(60), KStyle::dpiScale(30));
-	bgCb->setStyleSheet(strComboxStyleSheet);
-	bgCb->addItem("BGColor");
+	KColorLabel* bgColorLabel = new KColorLabel(this);
+	bgColorLabel->setObjectName("BackGroundColorLabel");
+	bgColorLabel->setToolTipPrefix(QObject::tr("BackGroundColor"));
 
-	QComboBox* fontSizeCb = new QComboBox(this);
-	fontSizeCb->setFixedSize(KStyle::dpiScale(60), KStyle::dpiScale(30));
-	fontSizeCb->setStyleSheet(strComboxStyleSheet);
+	KComboBox* fontSizeCb = new KComboBox(this);
+	fontSizeCb->setObjectName("FontSizeComboBox");
 	fontSizeCb->addItem("FontSize");
 
-	QComboBox* fontType = new QComboBox(this);
-	fontType->setFixedSize(KStyle::dpiScale(60), KStyle::dpiScale(30));
-	fontType->setStyleSheet(strComboxStyleSheet);
-	fontType->addItem("FontType");
+	KComboBox* fontTypeCb = new KComboBox(this);
+	fontTypeCb->setObjectName("FontTypeComboBox");
+	fontTypeCb->addItem("FontType");
 
 	QPushButton* copyButton = new QPushButton(this);
 	QString strButtonStyleSheet = QString("\
@@ -55,10 +51,10 @@ KWebToolWidget::KWebToolWidget(QWidget *parent) : QWidget(parent)
 	saveAsButton->setFixedSize(KStyle::dpiScale(60), KStyle::dpiScale(30));
 	saveAsButton->setStyleSheet(strButtonStyleSheet);
 
-	mainLayout->addWidget(textColorCb);
-	mainLayout->addWidget(bgCb);
+	mainLayout->addWidget(textColorLabel);
+	mainLayout->addWidget(bgColorLabel);
 	mainLayout->addWidget(fontSizeCb);
-	mainLayout->addWidget(fontType);
+	mainLayout->addWidget(fontTypeCb);
 	mainLayout->addWidget(copyButton);
 	mainLayout->addWidget(saveAsButton);
 
