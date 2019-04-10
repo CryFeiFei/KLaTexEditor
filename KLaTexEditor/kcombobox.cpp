@@ -10,10 +10,6 @@ KComboBox::KComboBox(QWidget* parent) : QComboBox(parent)
 {
 	setObjectName("KComboBox");
 	setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
-	QString styleSheet = QString("QComboBox{"
-											"border : none;}"
-											);
-	setStyleSheet(styleSheet);
 }
 
 KComboBox::~KComboBox()

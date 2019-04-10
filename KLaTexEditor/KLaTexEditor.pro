@@ -49,7 +49,8 @@ SOURCES += \
     kcore/kwebformulastring.cpp \
     kformulatextedit.cpp \
     kcolorlabel.cpp \
-    kcombobox.cpp
+    kcombobox.cpp \
+    kpushbutton.cpp
 
 HEADERS += \
     kmainwidget.h \
@@ -67,7 +68,8 @@ HEADERS += \
     kcore/kwebformulastring.h \
     kformulatextedit.h \
     kcolorlabel.h \
-    kcombobox.h
+    kcombobox.h \
+    kpushbutton.h
 
 FORMS += \
     ktitlewidget.ui \

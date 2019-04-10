@@ -4,15 +4,32 @@
 #include <QComboBox>
 #include "kcolorlabel.h"
 #include "kcombobox.h"
+#include "kpushbutton.h"
 
 ///////////////////////////////////////////////////
-KWebToolButton::KWebToolButton(QWidget* parent) : QPushButton(parent)
+KWebToolSeparate::KWebToolSeparate(QWidget* parent) : QWidget(parent)
 {
-	setObjectName("KWebToolButton");
+	setObjectName("KWebToolSeparate");
+	setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
 }
-KWebToolButton::~KWebToolButton()
+KWebToolSeparate::~KWebToolSeparate()
 {
 
+}
+
+void KWebToolSeparate::paintEvent(QPaintEvent *e)
+{
+	QPainter painter(this);
+	QPen pen;
+	pen.setColor(Qt::black);
+	pen.setWidth(KStyle::dpiScale(2));
+	painter.setPen(pen);
+	painter.drawLine(QPoint(0, sizeHint().height()), QPoint(KStyle::dpiScale(20), 0));
+}
+
+QSize KWebToolSeparate::sizeHint() const
+{
+	return QSize(KStyle::dpiScale(20), rect().height());
 }
 ///////////////////////////////////////////////////
 KWebToolWidget::KWebToolWidget(QWidget *parent) : QWidget(parent)
@@ -35,34 +52,29 @@ KWebToolWidget::KWebToolWidget(QWidget *parent) : QWidget(parent)
 	fontTypeCb->setObjectName("FontTypeComboBox");
 	fontTypeCb->addItem("FontType");
 
-	QPushButton* copyButton = new QPushButton(this);
-	QString strButtonStyleSheet = QString("\
-									QPushButton{\
-									border : none;\
-									border-radius : 2px;\
-									background-color : rgb(80, 135, 229);}");
-	copyButton->setText("copy to clip");
-	copyButton->setFixedWidth(KStyle::dpiScale(60));
-	copyButton->setFixedHeight(KStyle::dpiScale(30));
-	copyButton->setStyleSheet(strButtonStyleSheet);
+	KPushButton* copyButton = new KPushButton(this);
+	copyButton->setObjectName("CopyButton");
+	copyButton->setText("Copy");
+	copyButton->setToolTip("Copy to clipboard");
 
-	QPushButton* saveAsButton = new QPushButton(this);
-	saveAsButton->setText("save as");
-	saveAsButton->setFixedSize(KStyle::dpiScale(60), KStyle::dpiScale(30));
-	saveAsButton->setStyleSheet(strButtonStyleSheet);
+	KPushButton* saveButton = new KPushButton(this);
+	saveButton->setObjectName("SaveButton");
+	saveButton->setText("Save");
+	saveButton->setToolTip("Save as Image");
 
+	KWebToolSeparate* sep = new KWebToolSeparate(this);
 	mainLayout->addWidget(textColorLabel);
+	mainLayout->addWidget(sep);
 	mainLayout->addWidget(bgColorLabel);
 	mainLayout->addWidget(fontSizeCb);
 	mainLayout->addWidget(fontTypeCb);
 	mainLayout->addWidget(copyButton);
-	mainLayout->addWidget(saveAsButton);
+	mainLayout->addWidget(saveButton);
 
 	mainLayout->setMargin(0);
 	mainLayout->setSpacing(0);
 
 	setLayout(mainLayout);
-
 }
 
 KWebToolWidget::~KWebToolWidget()

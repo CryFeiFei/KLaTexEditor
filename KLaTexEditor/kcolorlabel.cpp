@@ -66,5 +66,5 @@ void KColorLabel::paintEvent(QPaintEvent *e)
 
 QSize KColorLabel::sizeHint() const
 {
-	return QSize(KStyle::dpiScale(24), size().height());
+	return QSize(KStyle::dpiScale(35), size().height());
 }
