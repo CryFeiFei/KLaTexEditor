@@ -12,7 +12,7 @@
 QStringList KFormulaTextEdit::m_textCompleter = QStringList(QList<QString>{"qqq", "qsed","daasd"});
 
 KFormulaTextEdit::KFormulaTextEdit(QWidget *parent)
-: QTextEdit(parent), c(nullptr)
+: QTextEdit(parent), m_completer(nullptr)
 {
 	setObjectName("KFormulaTextEdit");
 	//禁止中文输入法
@@ -23,6 +23,10 @@ KFormulaTextEdit::KFormulaTextEdit(QWidget *parent)
 	setFont(font);
 
 	setAcceptRichText(false);
+
+	//todo 这个得重构的，先加到这里，语法提示以后再加
+	QCompleter* com = new QCompleter(m_textCompleter, this);
+	setCompleter(com);
 }
 
 KFormulaTextEdit::~KFormulaTextEdit()
@@ -31,32 +35,32 @@ KFormulaTextEdit::~KFormulaTextEdit()
 
 void KFormulaTextEdit::setCompleter(QCompleter *completer)
 {
-	if (c)
-		QObject::disconnect(c, 0, this, 0);
+	if (m_completer)
+		QObject::disconnect(m_completer, 0, this, 0);
 
-	c = completer;
+	m_completer = completer;
 
-	if (!c)
+	if (!m_completer)
 		return;
 
-	c->setWidget(this);
-	c->setCompletionMode(QCompleter::PopupCompletion);
-	c->setCaseSensitivity(Qt::CaseInsensitive);
-	QObject::connect(c, SIGNAL(activated(QString)),
+	m_completer->setWidget(this);
+	m_completer->setCompletionMode(QCompleter::PopupCompletion);
+	m_completer->setCaseSensitivity(Qt::CaseInsensitive);
+	QObject::connect(m_completer, SIGNAL(activated(QString)),
 					 this, SLOT(insertCompletion(QString)));
 }
 
 QCompleter *KFormulaTextEdit::completer() const
 {
-	return c;
+	return m_completer;
 }
 
 void KFormulaTextEdit::insertCompletion(const QString& completion)
 {
-	if (c->widget() != this)
+	if (m_completer->widget() != this)
 		return;
 	QTextCursor tc = textCursor();
-	int extra = completion.length() - c->completionPrefix().length();
+	int extra = completion.length() - m_completer->completionPrefix().length();
 	tc.movePosition(QTextCursor::Left);
 	tc.movePosition(QTextCursor::EndOfWord);
 	tc.insertText(completion.right(extra));
@@ -72,14 +76,14 @@ QString KFormulaTextEdit::textUnderCursor() const
 
 void KFormulaTextEdit::focusInEvent(QFocusEvent *e)
 {
-	if (c)
-		c->setWidget(this);
+	if (m_completer)
+		m_completer->setWidget(this);
 	QTextEdit::focusInEvent(e);
 }
 
 void KFormulaTextEdit::keyPressEvent(QKeyEvent *e)
 {
-	if (c && c->popup()->isVisible()) {
+	if (m_completer && m_completer->popup()->isVisible()) {
 		// The following keys are forwarded by the completer to the widget
 		switch (e->key()) {
 		case Qt::Key_Enter:
@@ -95,11 +99,11 @@ void KFormulaTextEdit::keyPressEvent(QKeyEvent *e)
 	}
 
 	bool isShortcut = ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_E); // CTRL+E
-	if (!c || !isShortcut) // do not process the shortcut when we have a completer
+	if (!m_completer || !isShortcut) // do not process the shortcut when we have a completer
 		QTextEdit::keyPressEvent(e);
 
 	const bool ctrlOrShift = e->modifiers() & (Qt::ControlModifier | Qt::ShiftModifier);
-	if (!c || (ctrlOrShift && e->text().isEmpty()))
+	if (!m_completer || (ctrlOrShift && e->text().isEmpty()))
 		return;
 
 	static QString eow("~!@#$%^&*()_+{}|:\"<>?,./;'[]\\-="); // end of word
@@ -108,16 +112,16 @@ void KFormulaTextEdit::keyPressEvent(QKeyEvent *e)
 
 	if (!isShortcut && (hasModifier || e->text().isEmpty()|| completionPrefix.length() < 1
 					  || eow.contains(e->text().right(1)))) {
-		c->popup()->hide();
+		m_completer->popup()->hide();
 		return;
 	}
 
-	if (completionPrefix != c->completionPrefix()) {
-		c->setCompletionPrefix(completionPrefix);
-		c->popup()->setCurrentIndex(c->completionModel()->index(0, 0));
+	if (completionPrefix != m_completer->completionPrefix()) {
+		m_completer->setCompletionPrefix(completionPrefix);
+		m_completer->popup()->setCurrentIndex(m_completer->completionModel()->index(0, 0));
 	}
 	QRect cr = cursorRect();
-	cr.setWidth(c->popup()->sizeHintForColumn(0)
-				+ c->popup()->verticalScrollBar()->sizeHint().width());
-	c->complete(cr); // popup it up!
+	cr.setWidth(m_completer->popup()->sizeHintForColumn(0)
+				+ m_completer->popup()->verticalScrollBar()->sizeHint().width());
+	m_completer->complete(cr); // popup it up!
 }

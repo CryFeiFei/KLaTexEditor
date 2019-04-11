@@ -27,7 +27,7 @@ private:
 	QString textUnderCursor() const;
 
 private:
-	QCompleter *c;
+	QCompleter *m_completer;
 	static QStringList m_textCompleter;
 };
 
