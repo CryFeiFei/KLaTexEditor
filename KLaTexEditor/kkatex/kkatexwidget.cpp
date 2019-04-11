@@ -23,6 +23,7 @@ KKatexWidget::KKatexWidget(QWidget *parent) : QWidget(parent)
 	m_webView->setContextMenuPolicy(Qt::NoContextMenu);
 
 	m_webView->setMinimumSize(KStyle::dpiScale(380), KStyle::dpiScale(120));
+	m_webView->resize(KStyle::dpiScale(380), KStyle::dpiScale(280));
 
 	KWebToolWidget* webToolWidget = new KWebToolWidget(this);
 	webToolWidget->setStyleSheet("background-color:gray;");

@@ -1,4 +1,4 @@
-#ifndef KCOLORLABEL_H
+﻿#ifndef KCOLORLABEL_H
 #define KCOLORLABEL_H
 
 #include <QWidget>
@@ -7,8 +7,8 @@
 class KColorLabel : public QWidget
 {
 	Q_OBJECT
-	Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChange)
-	Q_PROPERTY(QColor color MEMBER m_bgColor NOTIFY colorChange)
+	Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged)
+	Q_PROPERTY(QColor color MEMBER m_bgColor NOTIFY colorChanged)
 public:
 	KColorLabel(QWidget *parent = nullptr);
 	~KColorLabel();
@@ -23,9 +23,11 @@ public:
 	bool event(QEvent *event) override;
 	void paintEvent(QPaintEvent* ) override;
 	QSize sizeHint() const override;
+	void mouseReleaseEvent(QMouseEvent *event) override;
 
 signals:
-	void colorChange();
+	void colorChanged();
+	void clicked();
 
 public slots:
 

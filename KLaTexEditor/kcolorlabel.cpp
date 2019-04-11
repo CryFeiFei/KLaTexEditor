@@ -1,4 +1,4 @@
-#include "kcolorlabel.h"
+﻿#include "kcolorlabel.h"
 
 #include <QPainter>
 #include <QToolTip>
@@ -62,6 +62,16 @@ void KColorLabel::paintEvent(QPaintEvent *e)
 {
 	QPainter painter(this);
 	painter.fillRect(rect(), QBrush(m_bgColor));
+}
+
+void KColorLabel::mouseReleaseEvent(QMouseEvent *event)
+{
+	if (rect().contains(event->pos()) && event->button() == Qt::LeftButton)
+	{
+		emit clicked();
+		return;
+	}
+	return QWidget::mouseReleaseEvent(event);
 }
 
 QSize KColorLabel::sizeHint() const

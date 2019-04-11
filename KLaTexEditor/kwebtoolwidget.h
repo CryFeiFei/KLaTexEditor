@@ -6,7 +6,6 @@
 
 #include <QWidget>
 #include <QPushButton>
-
 //add color select widget
 //add copy save tool widget
 // inset outset
@@ -24,6 +23,8 @@ public:
 	QSize sizeHint() const override;
 };
 
+class KColorLabel;
+
 class KWebToolWidget : public QWidget
 {
 	Q_OBJECT
@@ -32,8 +33,14 @@ public:
 	~KWebToolWidget();
 
 signals:
+	void textColorChanged(const QColor &);
+	void bgColorChanged(const QColor &);
 
 public slots:
+
+private:
+	KColorLabel* m_textColorLabel;
+	KColorLabel* m_bgColorLabel;
 };
 
 #endif // KWEBTOOLWIDGET_H

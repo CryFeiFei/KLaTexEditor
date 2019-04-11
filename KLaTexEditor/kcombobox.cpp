@@ -1,15 +1,22 @@
-#include "kcombobox.h"
+﻿#include "kcombobox.h"
 #include "kglobal.h"
 
 #include <QToolTip>
+#include <QListView>
 
-#define COMBOBOX_ARROW_SIZE 24
+constexpr int ArrowSize = 24;
 
 KComboBox::KComboBox(QWidget* parent) : QComboBox(parent)
 					, m_bgColor(Qt::gray)
 {
 	setObjectName("KComboBox");
 	setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
+
+	QListView* list = new QListView(this);
+	list->setStyleSheet("QListView::item{height:30px; font-size:20px; background-color:rgb(255,255,255); color:rgb(0, 0, 0);border:none;}"
+						 "QListView::item::hover{background-color:rgb(9,150,200); color:rgb(122, 122, 122); border:none;}"
+						 );
+	setView(list);
 }
 
 KComboBox::~KComboBox()
@@ -43,7 +50,7 @@ QSize KComboBox::sizeHint() const
 	}
 
 //#ifdef Q_OS_UNIX
-//	nMax += COMBOBOX_ARROW_SIZE;
+//	nMax += ArrowSize;
 //#endif
 
 	return QSize(KStyle::dpiScale(nMax), rect().height());

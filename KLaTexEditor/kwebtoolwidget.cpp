@@ -5,6 +5,8 @@
 #include "kcolorlabel.h"
 #include "kcombobox.h"
 #include "kpushbutton.h"
+#include <QColorDialog>
+
 
 ///////////////////////////////////////////////////
 KWebToolSeparate::KWebToolSeparate(QWidget* parent) : QWidget(parent)
@@ -22,9 +24,9 @@ void KWebToolSeparate::paintEvent(QPaintEvent *e)
 	QPainter painter(this);
 	QPen pen;
 	pen.setColor(Qt::black);
-	pen.setWidth(KStyle::dpiScale(2));
+	pen.setWidthF(KStyle::dpiScale(2));
 	painter.setPen(pen);
-	painter.drawLine(QPoint(0, sizeHint().height()), QPoint(KStyle::dpiScale(20), 0));
+	painter.drawLine(QPointF(0, sizeHint().height()), QPointF(KStyle::dpiScale(20), 0));
 }
 
 QSize KWebToolSeparate::sizeHint() const
@@ -36,17 +38,48 @@ KWebToolWidget::KWebToolWidget(QWidget *parent) : QWidget(parent)
 {
 	QHBoxLayout* mainLayout = new QHBoxLayout(this);
 
-	KColorLabel* textColorLabel = new KColorLabel(this);
-	textColorLabel->setObjectName("TextColorLabel");
-	textColorLabel->setToolTipPrefix(QObject::tr("TextColor"));
+	//-------------------------------------------------
+	m_textColorLabel = new KColorLabel(this);
+	m_textColorLabel->setObjectName("TextColorLabel");
+	m_textColorLabel->setToolTipPrefix(QObject::tr("TextColor"));
 
-	KColorLabel* bgColorLabel = new KColorLabel(this);
-	bgColorLabel->setObjectName("BackGroundColorLabel");
-	bgColorLabel->setToolTipPrefix(QObject::tr("BackGroundColor"));
+	auto fTextColor = [this]() -> void
+	{
+		QColor textColor = QColorDialog::getColor(m_textColorLabel->color());
+		m_textColorLabel->setColor(textColor);
+	};
+	auto fEmitTextColor = [this] () -> void
+	{
+		emit textColorChanged(m_textColorLabel->color());
+	};
+	connect(m_textColorLabel, &KColorLabel::clicked, fTextColor);
+	connect(m_textColorLabel, &KColorLabel::colorChanged, fEmitTextColor);
+
+	//-------------------------------------------------------------------
+	m_bgColorLabel = new KColorLabel(this);
+	m_bgColorLabel->setObjectName("BackGroundColorLabel");
+	m_bgColorLabel->setToolTipPrefix(QObject::tr("BackGroundColor"));
+	auto fBGColor = [this] () -> void
+	{
+		QColor bgColor = QColorDialog::getColor(m_bgColorLabel->color());
+		m_bgColorLabel->setColor(bgColor);
+	};
+	auto fEmitBGColor = [this] () -> void
+	{
+		emit bgColorChanged(m_bgColorLabel->color());
+	};
+	connect(m_bgColorLabel, &KColorLabel::clicked, fBGColor);
+	connect(m_bgColorLabel, &KColorLabel::colorChanged, fEmitBGColor);
+
+	//----------------------------------------------------------------
 
 	KComboBox* fontSizeCb = new KComboBox(this);
 	fontSizeCb->setObjectName("FontSizeComboBox");
-	fontSizeCb->addItem("FontSize");
+	fontSizeCb->setToolTipPrefix("FontSize");
+	QStringList fontSizeList;
+	fontSizeList<< "tiny" << "scriptsize" << "footnotesize" <<
+				"small" << "normalsize" << "large" << "Large" << "LARGE" << "huge" << "Huge";
+	fontSizeCb->addItems(fontSizeList);
 
 	KComboBox* fontTypeCb = new KComboBox(this);
 	fontTypeCb->setObjectName("FontTypeComboBox");
@@ -63,16 +96,16 @@ KWebToolWidget::KWebToolWidget(QWidget *parent) : QWidget(parent)
 	saveButton->setToolTip("Save as Image");
 
 	KWebToolSeparate* sep = new KWebToolSeparate(this);
-	mainLayout->addWidget(textColorLabel);
+	mainLayout->addWidget(m_textColorLabel);
 	mainLayout->addWidget(sep);
-	mainLayout->addWidget(bgColorLabel);
+	mainLayout->addWidget(m_bgColorLabel);
 	mainLayout->addWidget(fontSizeCb);
 	mainLayout->addWidget(fontTypeCb);
 	mainLayout->addWidget(copyButton);
 	mainLayout->addWidget(saveButton);
 
 	mainLayout->setMargin(0);
-	mainLayout->setSpacing(0);
+	mainLayout->setSpacing(2);
 
 	setLayout(mainLayout);
 }
