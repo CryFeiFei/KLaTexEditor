@@ -21,8 +21,6 @@ public:
 	bool event(QEvent *event) override;
 	void paintEvent(QPaintEvent* event) override;
 
-signals:
-
 public slots:
 
 private:

@@ -80,10 +80,16 @@ KWebToolWidget::KWebToolWidget(QWidget *parent) : QWidget(parent)
 	fontSizeList<< "tiny" << "scriptsize" << "footnotesize" <<
 				"small" << "normalsize" << "large" << "Large" << "LARGE" << "huge" << "Huge";
 	fontSizeCb->addItems(fontSizeList);
+	connect(fontSizeCb, &KComboBox::currentTextChanged, this, &KWebToolWidget::fontSizeChanged);
+	//------------------------------------------------------------
 
 	KComboBox* fontTypeCb = new KComboBox(this);
 	fontTypeCb->setObjectName("FontTypeComboBox");
-	fontTypeCb->addItem("FontType");
+	QStringList fontTypeList;
+	fontTypeList << "normal" << "rm" << "it" << "bf"
+				 <<"sf" << "tt" << "frak" << "Bbb" << "mathcal"
+				<< "bold" << "boldsymbol" << "matchscr";
+	fontTypeCb->addItems(fontTypeList);
 
 	KPushButton* copyButton = new KPushButton(this);
 	copyButton->setObjectName("CopyButton");
