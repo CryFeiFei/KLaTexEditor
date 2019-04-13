@@ -36,6 +36,9 @@ signals:
 	void textColorChanged(const QColor &);
 	void bgColorChanged(const QColor &);
 	void fontSizeChanged(const QString &);
+	void fontTypeChanged(const QString &);
+	void copyToClipboard();
+	void saveAs();
 
 public slots:
 

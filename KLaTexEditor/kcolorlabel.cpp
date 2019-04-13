@@ -5,7 +5,14 @@
 #include "kglobal.h"
 
 KColorLabel::KColorLabel(QWidget *parent) : QWidget(parent)
-			,m_bgColor(Qt::red)
+			,m_bgColor(Qt::white)
+{
+	setObjectName("KColorLabel");
+	setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
+}
+
+KColorLabel::KColorLabel(const QColor& color, QWidget *parent) : QWidget(parent)
+			, m_bgColor(color)
 {
 	setObjectName("KColorLabel");
 	setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);

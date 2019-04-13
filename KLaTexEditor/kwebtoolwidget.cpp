@@ -39,14 +39,17 @@ KWebToolWidget::KWebToolWidget(QWidget *parent) : QWidget(parent)
 	QHBoxLayout* mainLayout = new QHBoxLayout(this);
 
 	//-------------------------------------------------
-	m_textColorLabel = new KColorLabel(this);
+	m_textColorLabel = new KColorLabel(Qt::black, this);
 	m_textColorLabel->setObjectName("TextColorLabel");
 	m_textColorLabel->setToolTipPrefix(QObject::tr("TextColor"));
 
 	auto fTextColor = [this]() -> void
 	{
 		QColor textColor = QColorDialog::getColor(m_textColorLabel->color());
-		m_textColorLabel->setColor(textColor);
+		if (textColor.isValid())
+		{
+			m_textColorLabel->setColor(textColor);
+		}
 	};
 	auto fEmitTextColor = [this] () -> void
 	{
@@ -62,7 +65,10 @@ KWebToolWidget::KWebToolWidget(QWidget *parent) : QWidget(parent)
 	auto fBGColor = [this] () -> void
 	{
 		QColor bgColor = QColorDialog::getColor(m_bgColorLabel->color());
-		m_bgColorLabel->setColor(bgColor);
+		if (bgColor.isValid())
+		{
+			m_bgColorLabel->setColor(bgColor);
+		}
 	};
 	auto fEmitBGColor = [this] () -> void
 	{
@@ -80,6 +86,7 @@ KWebToolWidget::KWebToolWidget(QWidget *parent) : QWidget(parent)
 	fontSizeList<< "tiny" << "scriptsize" << "footnotesize" <<
 				"small" << "normalsize" << "large" << "Large" << "LARGE" << "huge" << "Huge";
 	fontSizeCb->addItems(fontSizeList);
+	fontSizeCb->setCurrentText("normalsize");
 	connect(fontSizeCb, &KComboBox::currentTextChanged, this, &KWebToolWidget::fontSizeChanged);
 	//------------------------------------------------------------
 
@@ -90,16 +97,21 @@ KWebToolWidget::KWebToolWidget(QWidget *parent) : QWidget(parent)
 				 <<"sf" << "tt" << "frak" << "Bbb" << "mathcal"
 				<< "bold" << "boldsymbol" << "matchscr";
 	fontTypeCb->addItems(fontTypeList);
+	connect(fontTypeCb, &KComboBox::currentTextChanged, this, &KWebToolWidget::fontTypeChanged);
+	///////////////////////////////////////////////////////////////////////////
 
 	KPushButton* copyButton = new KPushButton(this);
 	copyButton->setObjectName("CopyButton");
 	copyButton->setText("Copy");
 	copyButton->setToolTip("Copy to clipboard");
+	connect(copyButton, &KPushButton::clicked, this, &KWebToolWidget::copyToClipboard);
 
+	/////////////////////////////////////////////////////////////
 	KPushButton* saveButton = new KPushButton(this);
 	saveButton->setObjectName("SaveButton");
 	saveButton->setText("Save");
 	saveButton->setToolTip("Save as Image");
+	connect(saveButton, &KPushButton::clicked, this, &KWebToolWidget::saveAs);
 
 	KWebToolSeparate* sep = new KWebToolSeparate(this);
 	mainLayout->addWidget(m_textColorLabel);

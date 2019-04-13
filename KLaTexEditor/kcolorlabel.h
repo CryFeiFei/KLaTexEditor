@@ -11,6 +11,7 @@ class KColorLabel : public QWidget
 	Q_PROPERTY(QColor color MEMBER m_bgColor NOTIFY colorChanged)
 public:
 	KColorLabel(QWidget *parent = nullptr);
+	KColorLabel(const QColor &color, QWidget *parent = nullptr);
 	~KColorLabel();
 
 public:
