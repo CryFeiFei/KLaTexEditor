@@ -28,7 +28,6 @@ KMathJaxWidget::KMathJaxWidget(QWidget *parent) : QWidget(parent)
 	webToolWidget->setFixedHeight(KStyle::dpiScale(30));
 
 	m_textEdit = new KFormulaTextEdit(this);
-
 	QSplitter* splitter = new QSplitter(Qt::Vertical, this);
 	splitter->addWidget(m_webView);
 	splitter->addWidget(webToolWidget);
@@ -48,6 +47,7 @@ KMathJaxWidget::KMathJaxWidget(QWidget *parent) : QWidget(parent)
 	connect(m_textEdit, SIGNAL(textChanged()), SLOT(refershStart()));
 	connect(m_refershTimer, SIGNAL(timeout()), this, SLOT(refershFormula()));
 
+	connect(webToolWidget, &KWebToolWidget::textColorChanged, this, &KMathJaxWidget::textColorChange);
 }
 
 void KMathJaxWidget::updateWebView(QString strFormula)
@@ -77,6 +77,8 @@ void KMathJaxWidget::refershFormula()
 	m_strFormula = strFormat;
 	strFormat = _dealLatexString(strFormat);
 
+	strFormat = QString("\\color {#%1}{%2}").arg(m_textColor).arg(strFormat);
+
 //	emit updateFormula(strFormat);
 	updateWebView(strFormat);
 }
@@ -91,4 +93,27 @@ QString KMathJaxWidget::_dealLatexString(QString &strLatex)
 	strLatex.append(QString("$$"));
 
 	return strLatex;
+}
+
+void KMathJaxWidget::textColorChange(const QColor &color)
+{
+	m_textColor = color.name(QColor::HexRgb);
+	qDebug()<<m_textColor<<endl;
+//	\color {#rgb}{text}
+//	m_textColor = QString("\\color {#%1}{}")
+}
+
+void KMathJaxWidget::bgColorChange(const QColor &color)
+{
+
+}
+
+void KMathJaxWidget::fontSizeChange(const QString &fs)
+{
+
+}
+
+void KMathJaxWidget::fontTypeChange(const QString &ft)
+{
+
 }
