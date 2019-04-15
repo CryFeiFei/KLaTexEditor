@@ -32,6 +32,7 @@ void KColorLabel::setColor(QColor color)
 {
 	m_bgColor = color;
 	update();
+	emit colorChanged();
 }
 
 QString KColorLabel::toolTipPrefix()

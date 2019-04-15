@@ -13,11 +13,11 @@ KMathJaxWidget::KMathJaxWidget(QWidget *parent) : QWidget(parent)
 	QLabel* label = new QLabel(this);
 	label->setText("mathjax");
 	label->setFixedHeight(KStyle::dpiScale(20));
+	m_fontSize = QString("normalsize");
+	m_fontType = QString("");
 
 	m_webView = new QWebEngineView(this);
-
 	m_webView->load(QUrl("qrc:/html/resource/mathjax.html"));
-
 	m_webView->setMinimumSize(KStyle::dpiScale(380), KStyle::dpiScale(120));
 	m_webView->setEnabled(false);
 	m_webView->setContextMenuPolicy(Qt::NoContextMenu);
@@ -37,7 +37,6 @@ KMathJaxWidget::KMathJaxWidget(QWidget *parent) : QWidget(parent)
 	this->setMinimumWidth(KStyle::dpiScale(380));
 	mainLayout->addWidget(label);
 	mainLayout->addWidget(splitter);
-//	mainLayout->addWidget(webToolWidget);
 
 	mainLayout->setMargin(0);
 	mainLayout->setSpacing(1);
@@ -48,6 +47,8 @@ KMathJaxWidget::KMathJaxWidget(QWidget *parent) : QWidget(parent)
 	connect(m_refershTimer, SIGNAL(timeout()), this, SLOT(refershFormula()));
 
 	connect(webToolWidget, &KWebToolWidget::textColorChanged, this, &KMathJaxWidget::textColorChange);
+	connect(webToolWidget, &KWebToolWidget::fontSizeChanged, this, &KMathJaxWidget::fontSizeChange);
+	connect(webToolWidget, &KWebToolWidget::fontTypeChanged, this, &KMathJaxWidget::fontTypeChange);
 }
 
 void KMathJaxWidget::updateWebView(QString strFormula)
@@ -75,30 +76,70 @@ void KMathJaxWidget::refershFormula()
 		return;
 
 	m_strFormula = strFormat;
-	strFormat = _dealLatexString(strFormat);
 
-	strFormat = QString("\\color {#%1}{%2}").arg(m_textColor).arg(strFormat);
+	doRefersh();
+//	_dealLatexString(strFormat);
 
-//	emit updateFormula(strFormat);
+//	if (!m_textColor.isEmpty())
+//		strFormat = QString("\\\\color {%1}{%2}").arg(m_textColor).arg(strFormat);
+
+//	_addOutlineString(strFormat);
+//	updateWebView(strFormat);
+}
+
+void KMathJaxWidget::doRefersh()
+{
+	QString strFormat = m_strFormula;
+
+	_dealLatexString(strFormat);
+	_dealFontSizeTypeString(strFormat);
+
+
+	if (!m_textColor.isEmpty())
+		strFormat = QString("\\\\color {%1}{%2}").arg(m_textColor).arg(strFormat);
+
+	_addOutlineString(strFormat);
 	updateWebView(strFormat);
 }
 
-QString KMathJaxWidget::_dealLatexString(QString &strLatex)
+void KMathJaxWidget::_dealLatexString(QString &strLatex)
 {
 	strLatex.replace("\\", "\\\\");
 	//delete space
 //	strFormatA.remove(QRegExp("\\s"));
 	strLatex.remove(QRegExp("[\r\n]"));
+//	strLatex.insert(0, QString("$$"));
+//	strLatex.append(QString("$$"));
+
+//	return strLatex;
+}
+
+void KMathJaxWidget::_addOutlineString(QString &strLatex)
+{
 	strLatex.insert(0, QString("$$"));
 	strLatex.append(QString("$$"));
+}
 
-	return strLatex;
+void KMathJaxWidget::_dealFontSizeTypeString(QString &strLatex)
+{
+	QString strFontProper;
+	if (!m_fontSize.isEmpty())
+	{
+		strFontProper = QString("\\\\") + m_fontSize + QString(" ");
+	}
+	if (!m_fontType.isEmpty())
+	{
+		strFontProper = QString("\\\\") + m_fontType + QString(" ") + strFontProper;
+	}
+
+	strLatex = strFontProper + strLatex;
 }
 
 void KMathJaxWidget::textColorChange(const QColor &color)
 {
 	m_textColor = color.name(QColor::HexRgb);
 	qDebug()<<m_textColor<<endl;
+	doRefersh();
 //	\color {#rgb}{text}
 //	m_textColor = QString("\\color {#%1}{}")
 }
@@ -110,10 +151,16 @@ void KMathJaxWidget::bgColorChange(const QColor &color)
 
 void KMathJaxWidget::fontSizeChange(const QString &fs)
 {
-
+	m_fontSize = fs;
+	doRefersh();
 }
 
 void KMathJaxWidget::fontTypeChange(const QString &ft)
 {
+	if (ft == QString("normal"))
+		m_fontType = "";
+	else
+		m_fontType = ft;
 
+	doRefersh();
 }

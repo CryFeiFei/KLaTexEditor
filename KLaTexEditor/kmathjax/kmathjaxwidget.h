@@ -20,6 +20,7 @@ public slots:
 public slots:
 	void refershFormula();
 	void refershStart();
+	void doRefersh();
 
 	// web tool slot;
 public slots:
@@ -30,7 +31,9 @@ public slots:
 
 
 private:
-	QString _dealLatexString(QString &);
+	void _dealLatexString(QString &);
+	void _addOutlineString(QString &);
+	void _dealFontSizeTypeString(QString &);
 
 private:
 	QWebEngineView* m_webView;
