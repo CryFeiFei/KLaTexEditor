@@ -49,6 +49,13 @@ KKatexWidget::KKatexWidget(QWidget *parent) : QWidget(parent)
 	connect(m_textEdit, SIGNAL(textChanged()), SLOT(refershStart()));
 	connect(m_refershTimer, SIGNAL(timeout()), this, SLOT(refershFormula()));
 
+	connect(webToolWidget, &KWebToolWidget::textColorChanged, this, &KKatexWidget::textColorChange);
+//	connect(webToolWidget, &KWebToolWidget::bgColorChanged, this, todo)
+	connect(webToolWidget, &KWebToolWidget::fontSizeChanged, this, &KKatexWidget::fontSizeChange);
+	connect(webToolWidget, &KWebToolWidget::fontTypeChanged, this, &KKatexWidget::fontTypeChange);
+//	connect(webToolWidget, &KWebToolWidget::copyToClipboard, this, todo)
+//	connect(webToolWidget, &KWebToolWidget::saveAs, this, todo)
+
 	m_menu = new QMenu(this);
 	m_menu->addAction(new QAction(tr("&Open"), m_menu));
 	m_menu->addAction(new QAction(tr("&Mark"), m_menu));
@@ -58,15 +65,15 @@ KKatexWidget::KKatexWidget(QWidget *parent) : QWidget(parent)
 void KKatexWidget::contextMenuEvent(QContextMenuEvent *)
 {
 
-	QSvgGenerator svgg;
-	svgg.setFileName("D:\\q.svg");
-	svgg.setSize(QSize(200, 200));
-	svgg.setViewBox(QRect(0, 0, 200, 200));
-	svgg.setTitle(tr("SVG Generator Example Drawing"));
-	svgg.setDescription(tr("An SVG drawing created by the SVG Generator "
-	"Example provided with Qt."));
-	QPainter pp(&svgg);
-	m_webView->render(&pp);
+//	QSvgGenerator svgg;
+//	svgg.setFileName("D:\\q.svg");
+//	svgg.setSize(QSize(200, 200));
+//	svgg.setViewBox(QRect(0, 0, 200, 200));
+//	svgg.setTitle(tr("SVG Generator Example Drawing"));
+//	svgg.setDescription(tr("An SVG drawing created by the SVG Generator "
+//	"Example provided with Qt."));
+//	QPainter pp(&svgg);
+//	m_webView->render(&pp);
 	m_menu->move(cursor().pos());
 	m_menu->show();
 }
@@ -95,21 +102,85 @@ void KKatexWidget::refershFormula()
 	if (m_strFormula == m_textEdit->toPlainText())
 		return;
 
-//	m_strFormula = strFormat;
-	strFormat = _dealLatexString(strFormat);
+	m_strFormula = strFormat;
 
-//	emit updateFormula(strFormat);
+	doRefersh();
+}
+
+void KKatexWidget::doRefersh()
+{
+	QString strFormat = m_strFormula;
+
+	_dealLatexString(strFormat);
+	_dealFontSizeTypeString(strFormat);
+
+
+	if (!m_textColor.isEmpty())
+		strFormat = QString("\\\\color {%1}{%2}").arg(m_textColor).arg(strFormat);
+
+	_addOutlineString(strFormat);
 	updateWebView(strFormat);
 }
 
-QString KKatexWidget::_dealLatexString(QString &strLatex)
+void KKatexWidget::_dealLatexString(QString &strLatex)
 {
 	strLatex.replace("\\", "\\\\");
 	//delete space
 //	strFormatA.remove(QRegExp("\\s"));
 	strLatex.remove(QRegExp("[\r\n]"));
+//	strLatex.insert(0, QString("$$"));
+//	strLatex.append(QString("$$"));
+
+//	return strLatex;
+}
+
+void KKatexWidget::_addOutlineString(QString &strLatex)
+{
 	strLatex.insert(0, QString("$$"));
 	strLatex.append(QString("$$"));
+}
 
-	return strLatex;
+void KKatexWidget::_dealFontSizeTypeString(QString &strLatex)
+{
+	QString strFontProper;
+	if (!m_fontSize.isEmpty())
+	{
+		strFontProper = QString("\\\\") + m_fontSize + QString(" ");
+	}
+	if (!m_fontType.isEmpty())
+	{
+		strFontProper = QString("\\\\") + m_fontType + QString(" ") + strFontProper;
+	}
+
+	strLatex = strFontProper + strLatex;
+}
+
+void KKatexWidget::textColorChange(const QColor &color)
+{
+	m_textColor = color.name(QColor::HexRgb);
+	qDebug()<<m_textColor<<endl;
+	doRefersh();
+//	\color {#rgb}{text}
+//	m_textColor = QString("\\color {#%1}{}")
+}
+
+void KKatexWidget::bgColorChange(const QColor &color)
+{
+
+}
+
+void KKatexWidget::fontSizeChange(const QString &fs)
+{
+	m_fontSize = fs;
+	doRefersh();
+}
+
+void KKatexWidget::fontTypeChange(const QString &ft)
+{
+	if (ft == QString("normal"))
+		m_fontType = "";
+	else
+		m_fontType = ft;
+
+	doRefersh();
 }

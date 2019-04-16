@@ -47,8 +47,11 @@ KMathJaxWidget::KMathJaxWidget(QWidget *parent) : QWidget(parent)
 	connect(m_refershTimer, SIGNAL(timeout()), this, SLOT(refershFormula()));
 
 	connect(webToolWidget, &KWebToolWidget::textColorChanged, this, &KMathJaxWidget::textColorChange);
+//	connect(webToolWidget, &KWebToolWidget::bgColorChanged, this, todo)
 	connect(webToolWidget, &KWebToolWidget::fontSizeChanged, this, &KMathJaxWidget::fontSizeChange);
 	connect(webToolWidget, &KWebToolWidget::fontTypeChanged, this, &KMathJaxWidget::fontTypeChange);
+//	connect(webToolWidget, &KWebToolWidget::copyToClipboard, this, todo)
+//	connect(webToolWidget, &KWebToolWidget::saveAs, this, todo)
 }
 
 void KMathJaxWidget::updateWebView(QString strFormula)
