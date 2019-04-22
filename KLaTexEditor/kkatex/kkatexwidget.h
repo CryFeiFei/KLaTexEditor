@@ -45,7 +45,7 @@ private:
 	KFormulaTextEdit* m_textEdit;
 	QTimer* m_refershTimer;
 	QString m_strFormula;
-	QMenu* m_menu;
+	QMenu* m_menu; // 右键菜单
 
 	QString m_textColor; // 文本颜色的颜色
 	QString m_bgColor; //背景颜色

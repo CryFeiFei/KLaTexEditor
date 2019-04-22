@@ -51,7 +51,7 @@ KMathJaxWidget::KMathJaxWidget(QWidget *parent) : QWidget(parent)
 	connect(webToolWidget, &KWebToolWidget::fontSizeChanged, this, &KMathJaxWidget::fontSizeChange);
 	connect(webToolWidget, &KWebToolWidget::fontTypeChanged, this, &KMathJaxWidget::fontTypeChange);
 //	connect(webToolWidget, &KWebToolWidget::copyToClipboard, this, todo)
-//	connect(webToolWidget, &KWebToolWidget::saveAs, this, todo)
+	connect(webToolWidget, &KWebToolWidget::saveAs, this, &KMathJaxWidget::saveAs);
 }
 
 void KMathJaxWidget::updateWebView(QString strFormula)
@@ -166,4 +166,16 @@ void KMathJaxWidget::fontTypeChange(const QString &ft)
 		m_fontType = ft;
 
 	doRefersh();
+}
+
+void KMathJaxWidget::copyToClipboard()
+{
+
+}
+
+void KMathJaxWidget::saveAs()
+{
+	QImage img(m_webView->size(), QImage::Format_ARGB32_Premultiplied);
+	m_webView->render(&img);
+	img.save("D:\\1.png", "png");
 }

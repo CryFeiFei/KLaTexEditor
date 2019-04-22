@@ -111,7 +111,7 @@ KWebToolWidget::KWebToolWidget(QWidget *parent) : QWidget(parent)
 	saveButton->setObjectName("SaveButton");
 	saveButton->setText("Save");
 	saveButton->setToolTip("Save as Image");
-	connect(saveButton, &KPushButton::clicked, this, &KWebToolWidget::saveAs);
+	connect(saveButton, &KPushButton::pressed, this, &KWebToolWidget::saveAs);
 
 	KWebToolSeparate* sep = new KWebToolSeparate(this);
 	mainLayout->addWidget(m_textColorLabel);

@@ -28,6 +28,8 @@ public slots:
 	void bgColorChange(const QColor &);
 	void fontSizeChange(const QString &);
 	void fontTypeChange(const QString &);
+	void copyToClipboard();
+	void saveAs();
 
 
 private:

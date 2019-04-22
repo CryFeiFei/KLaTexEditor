@@ -57,9 +57,11 @@ KKatexWidget::KKatexWidget(QWidget *parent) : QWidget(parent)
 //	connect(webToolWidget, &KWebToolWidget::saveAs, this, todo)
 
 	m_menu = new QMenu(this);
-	m_menu->addAction(new QAction(tr("&Open"), m_menu));
-	m_menu->addAction(new QAction(tr("&Mark"), m_menu));
-	m_menu->addAction(new QAction(tr("&Quit"), m_menu));
+	QAction* cp2clip = new QAction(tr("&Copy to Clipboard"), m_menu);
+	m_menu->addAction(cp2clip);
+
+	QAction* saveAs = new QAction(tr("&Save As"), m_menu);
+	m_menu->addAction(saveAs);
 }
 
 void KKatexWidget::contextMenuEvent(QContextMenuEvent *)
