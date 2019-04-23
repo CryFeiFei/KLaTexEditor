@@ -2,9 +2,12 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QSplitter>
+#include <QFileDialog>
+#include <QApplication>
 #include "kglobal.h"
 #include "kwebtoolwidget.h"
 #include "kformulatextedit.h"
+#include <QClipboard>
 
 KMathJaxWidget::KMathJaxWidget(QWidget *parent) : QWidget(parent)
 {
@@ -50,7 +53,7 @@ KMathJaxWidget::KMathJaxWidget(QWidget *parent) : QWidget(parent)
 //	connect(webToolWidget, &KWebToolWidget::bgColorChanged, this, todo)
 	connect(webToolWidget, &KWebToolWidget::fontSizeChanged, this, &KMathJaxWidget::fontSizeChange);
 	connect(webToolWidget, &KWebToolWidget::fontTypeChanged, this, &KMathJaxWidget::fontTypeChange);
-//	connect(webToolWidget, &KWebToolWidget::copyToClipboard, this, todo)
+	connect(webToolWidget, &KWebToolWidget::copyToClipboard, this, &KMathJaxWidget::copyToClipboard);
 	connect(webToolWidget, &KWebToolWidget::saveAs, this, &KMathJaxWidget::saveAs);
 }
 
@@ -170,12 +173,22 @@ void KMathJaxWidget::fontTypeChange(const QString &ft)
 
 void KMathJaxWidget::copyToClipboard()
 {
+	QImage img(m_webView->size(), QImage::Format_ARGB32_Premultiplied);
+	m_webView->render(&img);
 
+//	QClipboard* clipBoard= QApplication::clipboard();
+	QApplication::clipboard()->setImage(img);
 }
 
 void KMathJaxWidget::saveAs()
 {
 	QImage img(m_webView->size(), QImage::Format_ARGB32_Premultiplied);
 	m_webView->render(&img);
-	img.save("D:\\1.png", "png");
+	QString filter = "Images (*.png);;Images (*.jpg)";
+	QString selectedFilter;
+	QString strFileName = QFileDialog::getSaveFileName(nullptr, "MathJax", QString(), filter, &selectedFilter);
+
+	QFileInfo fileInfo(strFileName);
+	QString strSuffix = fileInfo.suffix();
+	img.save(strFileName, strSuffix.toStdString().c_str());
 }
