@@ -50,7 +50,7 @@ KMathJaxWidget::KMathJaxWidget(QWidget *parent) : QWidget(parent)
 	connect(m_refershTimer, SIGNAL(timeout()), this, SLOT(refershFormula()));
 
 	connect(webToolWidget, &KWebToolWidget::textColorChanged, this, &KMathJaxWidget::textColorChange);
-//	connect(webToolWidget, &KWebToolWidget::bgColorChanged, this, todo)
+	connect(webToolWidget, &KWebToolWidget::bgColorChanged, this, &KMathJaxWidget::bgColorChange);
 	connect(webToolWidget, &KWebToolWidget::fontSizeChanged, this, &KMathJaxWidget::fontSizeChange);
 	connect(webToolWidget, &KWebToolWidget::fontTypeChanged, this, &KMathJaxWidget::fontTypeChange);
 	connect(webToolWidget, &KWebToolWidget::copyToClipboard, this, &KMathJaxWidget::copyToClipboard);
@@ -152,7 +152,11 @@ void KMathJaxWidget::textColorChange(const QColor &color)
 
 void KMathJaxWidget::bgColorChange(const QColor &color)
 {
+	QString strColor = color.name(QColor::HexRgb);
 
+	QString runJS = QString("changeBGColor(\"%1\")").arg(strColor);
+
+	m_webView->page()->runJavaScript(runJS);
 }
 
 void KMathJaxWidget::fontSizeChange(const QString &fs)
@@ -176,7 +180,6 @@ void KMathJaxWidget::copyToClipboard()
 	QImage img(m_webView->size(), QImage::Format_ARGB32_Premultiplied);
 	m_webView->render(&img);
 
-//	QClipboard* clipBoard= QApplication::clipboard();
 	QApplication::clipboard()->setImage(img);
 }
 

@@ -15,7 +15,6 @@ html, body
       height:100%;
       width:100%;
       position:fixed;
-      background-color:white;
       text-align:center;
       vertical-align:middle;
   }
@@ -26,13 +25,19 @@ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorM
 <script>
     function renderLatexByRaw(latexString)
     {
+ //       document.getElementById("body").style.background = 'red';
         var element =  document.getElementById('latexrender')
         element.innerHTML = latexString;
         MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
     }
+    function changeBGColor(color)
+    {
+        var element = document.getElementById('body');
+        element.style.background = color;
+    }
 </script>
 </head>
-<body>
+<body id = "body">
 
     <table class="latexRenderBox">
         <tr><th>
