@@ -15,14 +15,14 @@
 <style>
 html, body
 {
-margin:0;
-padding:0;
+    margin:0;
+    padding:0;
 }
-.latexRenderBox {
+.latexRenderBox 
+{
     height:100%;
     width:100%;
     position:fixed;
-    background-color:white;
     text-align:center;
     vertical-align:middle;
 }
@@ -106,9 +106,27 @@ padding:0;
         renderMathInElement(document.body);
     }
 
+        //背景颜色变化
+    function changeBGColor(color)
+    {
+        var element = document.getElementById('body');
+        element.style.background = color;
+    }
+    //span颜色变化
+    // function changeSpanColor(color)
+    // {
+    //     var element = document.getElementById('latexrender');
+    //     element.style.background = color;
+    // }
+    // 字体颜色变化
+    function changeFontColor(color)
+    {
+        var element = document.getElementById('latexrender');
+        element.style.color = color;
+    }
 
 </script>
-<body>
+<body id = "body">
 
   <!-- <div id="doc" align="left" style="position:inherit">
         <div id = "latex">

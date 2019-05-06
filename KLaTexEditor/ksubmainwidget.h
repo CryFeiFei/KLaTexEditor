@@ -6,6 +6,7 @@
 class QTimer;
 class KKatexWidget;
 class KMathJaxWidget;
+class KFormulaWidget;
 
 
 namespace Ui {
@@ -22,8 +23,8 @@ public:
 
 private:
 	Ui::KSubMainWidget *ui;
-	KKatexWidget* m_katexWidget;
-	KMathJaxWidget* m_mathjaxWidget;
+	KFormulaWidget* m_katexWidget;
+	KFormulaWidget* m_mathjaxWidget;
 };
 
 #endif // KSUBMAINWIDGET_H

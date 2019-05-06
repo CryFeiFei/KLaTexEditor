@@ -143,11 +143,14 @@ void KMathJaxWidget::_dealFontSizeTypeString(QString &strLatex)
 
 void KMathJaxWidget::textColorChange(const QColor &color)
 {
-	m_textColor = color.name(QColor::HexRgb);
-	qDebug()<<m_textColor<<endl;
-	doRefersh();
+//	m_textColor = color.name(QColor::HexRgb);
+//	qDebug()<<m_textColor<<endl;
+//	doRefersh();
 //	\color {#rgb}{text}
 //	m_textColor = QString("\\color {#%1}{}")
+	QString strColor = color.name(QColor::HexRgb);
+	QString runJS = QString("changeFontColor(\"%1\")").arg(strColor);
+	m_webView->page()->runJavaScript(runJS);
 }
 
 void KMathJaxWidget::bgColorChange(const QColor &color)

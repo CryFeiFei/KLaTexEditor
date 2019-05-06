@@ -44,12 +44,6 @@ private:
 	QString m_strFormula;
 
 
-//	void textColorChanged(const QColor &);
-//	void bgColorChanged(const QColor &);
-//	void fontSizeChanged(const QString &);
-//	void fontTypeChanged(const QString &);
-//	void copyToClipboard();
-//	void saveAs();
 	QString m_textColor; // 文本颜色的颜色
 	QString m_bgColor; //背景颜色
 	QString m_fontSize; //字体大小

@@ -25,15 +25,29 @@ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorM
 <script>
     function renderLatexByRaw(latexString)
     {
- //       document.getElementById("body").style.background = 'red';
+        // document.getElementById("body").style.backgroundColor = 'red';
+         document.getElementById("latexrender").style.color = 'green';
         var element =  document.getElementById('latexrender')
         element.innerHTML = latexString;
         MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
     }
+    //背景颜色变化
     function changeBGColor(color)
     {
         var element = document.getElementById('body');
         element.style.background = color;
+    }
+    //span颜色变化
+    // function changeSpanColor(color)
+    // {
+    //     var element = document.getElementById('latexrender');
+    //     element.style.background = color;
+    // }
+    // 字体颜色变化
+    function changeFontColor(color)
+    {
+        var element = document.getElementById('latexrender');
+        element.style.color = color;
     }
 </script>
 </head>
