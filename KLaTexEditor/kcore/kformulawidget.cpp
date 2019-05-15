@@ -15,7 +15,7 @@
 #include <QSvgGenerator>
 
 KFormulaWidget::KFormulaWidget(QWidget *parent/* = nullptr*/, QString strUrl/* = QString()*/, QString strTitle/* = QString()*/)
-: QWidget(parent), m_strUrl(strUrl)
+: QWidget(parent), m_strUrl(strUrl), m_strTitle(strTitle)
 {
 	QVBoxLayout* mainLayout = new QVBoxLayout(this);
 
@@ -68,8 +68,12 @@ KFormulaWidget::KFormulaWidget(QWidget *parent/* = nullptr*/, QString strUrl/* =
 	QAction* saveAs = new QAction(tr("&Save As"), m_menu);
 	m_menu->addAction(saveAs);
 
+	QAction* saveAsPdf = new QAction(tr("&Save As PDF"), m_menu);
+	m_menu->addAction(saveAsPdf);
+
 	connect(cp2clip, &QAction::triggered, this, &KFormulaWidget::copyToClipboard);
 	connect(saveAs, &QAction::triggered, this, &KFormulaWidget::saveAs);
+	connect(saveAsPdf, &QAction::triggered, this, &KFormulaWidget::saveAsPdf);
 }
 
 KFormulaWidget::~KFormulaWidget()
@@ -230,9 +234,17 @@ void KFormulaWidget::saveAs()
 	m_webView->render(&img);
 	QString filter = "Images (*.png);;Images (*.jpg)";
 	QString selectedFilter;
-	QString strFileName = QFileDialog::getSaveFileName(nullptr, "MathJax", QString(), filter, &selectedFilter);
+	QString strFileName = QFileDialog::getSaveFileName(nullptr, m_strTitle, QString(), filter, &selectedFilter);
 
 	QFileInfo fileInfo(strFileName);
 	QString strSuffix = fileInfo.suffix();
 	img.save(strFileName, strSuffix.toStdString().c_str());
+}
+
+void KFormulaWidget::saveAsPdf()
+{
+	QString filter = "PDF (*.pdf);;";
+	QString selectedFilter;
+	QString strFileName = QFileDialog::getSaveFileName(nullptr, m_strTitle, QString(), filter, &selectedFilter);
+	m_webView->page()->printToPdf(strFileName);
 }

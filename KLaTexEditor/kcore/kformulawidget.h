@@ -34,6 +34,7 @@ public slots:
 	void fontTypeChange(const QString &);
 	void copyToClipboard();
 	void saveAs();
+	void saveAsPdf();
 
 private:
 	void _dealLatexString(QString &);
@@ -52,6 +53,9 @@ private:
 	QString m_bgColor; //背景颜色
 	QString m_fontSize; //字体大小
 	QString m_fontType; //字体类型
+
+	//
+	QString m_strTitle;
 };
 
 #endif // KFORMULAWIDGET_H
