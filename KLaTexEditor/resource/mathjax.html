@@ -26,7 +26,7 @@ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorM
     function renderLatexByRaw(latexString)
     {
         // document.getElementById("body").style.backgroundColor = 'red';
-         document.getElementById("latexrender").style.color = 'green';
+//         document.getElementById("latexrender").style.color = 'green';
         var element =  document.getElementById('latexrender')
         element.innerHTML = latexString;
         MathJax.Hub.Queue(["Typeset", MathJax.Hub]);

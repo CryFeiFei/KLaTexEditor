@@ -67,6 +67,9 @@ KFormulaWidget::KFormulaWidget(QWidget *parent/* = nullptr*/, QString strUrl/* =
 
 	QAction* saveAs = new QAction(tr("&Save As"), m_menu);
 	m_menu->addAction(saveAs);
+
+	connect(cp2clip, &QAction::triggered, this, &KFormulaWidget::copyToClipboard);
+	connect(saveAs, &QAction::triggered, this, &KFormulaWidget::saveAs);
 }
 
 KFormulaWidget::~KFormulaWidget()
@@ -213,14 +216,17 @@ void KFormulaWidget::fontTypeChange(const QString &ft)
 void KFormulaWidget::copyToClipboard()
 {
 	QImage img(m_webView->size(), QImage::Format_ARGB32_Premultiplied);
+	qDebug()<<img.dotsPerMeterX()<<endl;
+	qDebug()<<img.dotsPerMeterY()<<endl;
 	m_webView->render(&img);
-
 	QApplication::clipboard()->setImage(img);
 }
 
 void KFormulaWidget::saveAs()
 {
 	QImage img(m_webView->size(), QImage::Format_ARGB32_Premultiplied);
+	img.setDotsPerMeterX(6000);
+	img.setDotsPerMeterY(6000);
 	m_webView->render(&img);
 	QString filter = "Images (*.png);;Images (*.jpg)";
 	QString selectedFilter;
