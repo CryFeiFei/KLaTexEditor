@@ -41,8 +41,6 @@ SOURCES += \
     krbtoolbar/krbtabbar.cpp \
     krbtoolbar/krbtoolbar.cpp \
     krbtoolbar/krbbuttongroup.cpp \
-    kkatex/kkatexwidget.cpp \
-    kmathjax/kmathjaxwidget.cpp \
     krbtoolbar/krbtoolbutton.cpp \
     krbtoolbar/krbtabwidget.cpp \
     kwebtoolwidget.cpp \
@@ -51,7 +49,8 @@ SOURCES += \
     kcolorlabel.cpp \
     kcombobox.cpp \
     kpushbutton.cpp \
-    kcore/kformulawidget.cpp
+    kcore/kformulawidget.cpp \
+    kcore/kformulatitlewidget.cpp
 
 HEADERS += \
     kmainwidget.h \
@@ -61,8 +60,6 @@ HEADERS += \
     krbtoolbar/krbtoolbar.h \
     kglobal.h \
     krbtoolbar/krbbuttongroup.h \
-    kkatex/kkatexwidget.h \
-    kmathjax/kmathjaxwidget.h \
     krbtoolbar/krbtoolbutton.h \
     krbtoolbar/krbtabwidget.h \
     kwebtoolwidget.h \
@@ -71,7 +68,8 @@ HEADERS += \
     kcolorlabel.h \
     kcombobox.h \
     kpushbutton.h \
-    kcore/kformulawidget.h
+    kcore/kformulawidget.h \
+    kcore/kformulatitlewidget.h
 
 FORMS += \
     ktitlewidget.ui \

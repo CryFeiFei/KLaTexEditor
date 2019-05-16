@@ -9,19 +9,19 @@
 #include <QApplication>
 #include "kglobal.h"
 #include <QClipboard>
+#include "kformulatitlewidget.h"
 
-
-#include <QSvgRenderer>
-#include <QSvgGenerator>
+//#include <QSvgRenderer>
+//#include <QSvgGenerator>
 
 KFormulaWidget::KFormulaWidget(QWidget *parent/* = nullptr*/, QString strUrl/* = QString()*/, QString strTitle/* = QString()*/)
 : QWidget(parent), m_strUrl(strUrl), m_strTitle(strTitle)
 {
 	QVBoxLayout* mainLayout = new QVBoxLayout(this);
 
-	QLabel* label = new QLabel(this);
-	label->setText(strTitle);
-	label->setFixedHeight(KStyle::dpiScale(20));
+	KFormulaTitleWidget* title = new KFormulaTitleWidget(strTitle, this);
+	title->setFixedHeight(KStyle::dpiScale(25));
+
 	m_fontSize = QString("normalsize");
 	m_fontType = QString("");
 
@@ -44,10 +44,10 @@ KFormulaWidget::KFormulaWidget(QWidget *parent/* = nullptr*/, QString strUrl/* =
 	splitter->setChildrenCollapsible(false);
 
 	setMinimumWidth(KStyle::dpiScale(380));
-	mainLayout->addWidget(label);
+	mainLayout->addWidget(title);
 	mainLayout->addWidget(splitter);
 	mainLayout->setMargin(0);
-	mainLayout->setSpacing(1);
+	mainLayout->setSpacing(0);
 
 	m_refershTimer = new QTimer(this);
 
@@ -59,6 +59,12 @@ KFormulaWidget::KFormulaWidget(QWidget *parent/* = nullptr*/, QString strUrl/* =
 	connect(webToolWidget, &KWebToolWidget::fontTypeChanged, this, &KFormulaWidget::fontTypeChange);
 	connect(webToolWidget, &KWebToolWidget::copyToClipboard, this, &KFormulaWidget::copyToClipboard);
 	connect(webToolWidget, &KWebToolWidget::saveAs, this, &KFormulaWidget::saveAs);
+	auto fReload = [this] ()
+	{
+		m_webView->reload();
+		refershFormula();
+	};
+	connect(title, &KFormulaTitleWidget::refresh, fReload);
 
 
 	m_menu = new QMenu(this);
@@ -123,13 +129,6 @@ void KFormulaWidget::refershFormula()
 	m_strFormula = strFormat;
 
 	doRefersh();
-//	_dealLatexString(strFormat);
-
-//	if (!m_textColor.isEmpty())
-//		strFormat = QString("\\\\color {%1}{%2}").arg(m_textColor).arg(strFormat);
-
-//	_addOutlineString(strFormat);
-//	updateWebView(strFormat);
 }
 
 void KFormulaWidget::doRefersh()

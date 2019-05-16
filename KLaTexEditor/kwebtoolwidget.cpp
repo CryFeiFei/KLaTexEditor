@@ -123,7 +123,7 @@ KWebToolWidget::KWebToolWidget(QWidget *parent) : QWidget(parent)
 	mainLayout->addWidget(saveButton);
 
 	mainLayout->setMargin(0);
-	mainLayout->setSpacing(2);
+	mainLayout->setSpacing(0);
 
 	setLayout(mainLayout);
 }

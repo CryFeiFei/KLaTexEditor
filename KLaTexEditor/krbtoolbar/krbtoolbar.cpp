@@ -39,7 +39,7 @@ KRbToolBar::KRbToolBar(QWidget *parent) : QWidget(parent)
 
 	mainLayout->addWidget(m_rbTabWidget);
 	mainLayout->setMargin(0);
-	mainLayout->setSpacing(0);
+	mainLayout->setSpacing(1);
 	setLayout(mainLayout);
 
 }

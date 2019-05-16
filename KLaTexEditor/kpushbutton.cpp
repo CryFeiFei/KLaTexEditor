@@ -1,7 +1,7 @@
 #include "kpushbutton.h"
 #include "kglobal.h"
 
-static QString KPBStyle = QString("\
+const static QString KPBStyle = QString("\
 								QPushButton{\
 								border : none;\
 								border-radius : 2px;\
@@ -15,5 +15,5 @@ KPushButton::KPushButton(QWidget *parent) : QPushButton(parent)
 }
 QSize KPushButton::sizeHint() const
 {
-  return QSize(KStyle::dpiScale(60), size().height());
+return QSize(KStyle::dpiScale(60), size().height());
 }
