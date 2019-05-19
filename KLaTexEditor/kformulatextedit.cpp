@@ -9,7 +9,7 @@
 #include <QScrollBar>
 
 
-QStringList KFormulaTextEdit::m_textCompleter = QStringList(QList<QString>{"qqq", "qsed","daasd"});
+QStringList KFormulaTextEdit::m_textCompleter = QStringList();
 
 KFormulaTextEdit::KFormulaTextEdit(QWidget *parent)
 : QTextEdit(parent), m_completer(nullptr)
@@ -24,6 +24,7 @@ KFormulaTextEdit::KFormulaTextEdit(QWidget *parent)
 
 	setAcceptRichText(false);
 
+	_initCompleter();
 	//todo 这个得重构的，先加到这里，语法提示以后再加
 	QCompleter* com = new QCompleter(m_textCompleter, this);
 	setCompleter(com);
@@ -31,6 +32,18 @@ KFormulaTextEdit::KFormulaTextEdit(QWidget *parent)
 
 KFormulaTextEdit::~KFormulaTextEdit()
 {
+}
+
+void KFormulaTextEdit::_initCompleter()
+{
+	//todo 多線程搞
+	if (m_textCompleter.isEmpty())
+	{
+		m_textCompleter << "bar";
+	}
+
+	QCompleter* completer = new QCompleter(m_textCompleter, this);
+	setCompleter(completer);
 }
 
 void KFormulaTextEdit::setCompleter(QCompleter *completer)

@@ -25,6 +25,7 @@ private slots:
 
 private:
 	QString textUnderCursor() const;
+	void _initCompleter();
 
 private:
 	QCompleter *m_completer;
