@@ -4,6 +4,7 @@
 #include <QWidget>
 
 class KPushButton;
+
 class KFormulaTitleWidget : public QWidget
 {
 	Q_OBJECT

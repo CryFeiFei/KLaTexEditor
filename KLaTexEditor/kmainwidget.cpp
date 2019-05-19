@@ -26,6 +26,7 @@ KMainWidget::KMainWidget(QWidget *parent) : QWidget(parent)
 	m_titleBar->setVisible(false);
 
 	m_toolBar = new KRbToolBar(this);
+	m_toolBar->setVisible(false);
 	mainLayout->addWidget(m_toolBar);
 
 	m_subMainWidget = new KSubMainWidget(this);

@@ -33,7 +33,8 @@ KSubMainWidget::KSubMainWidget(QWidget *parent) :
 	mainSplitter->addWidget(ui->webWidget);
 	ui->verticalLayout->addWidget(mainSplitter);
 
-	setMinimumWidth(KStyle::dpiScale(800));
+	setMinimumWidth(KStyle::dpiScale(850));
+	setMinimumHeight(KStyle::dpiScale(400));
 }
 
 KSubMainWidget::~KSubMainWidget()

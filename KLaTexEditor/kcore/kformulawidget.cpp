@@ -20,7 +20,7 @@ KFormulaWidget::KFormulaWidget(QWidget *parent/* = nullptr*/, QString strUrl/* =
 	QVBoxLayout* mainLayout = new QVBoxLayout(this);
 
 	KFormulaTitleWidget* title = new KFormulaTitleWidget(strTitle, this);
-	title->setFixedHeight(KStyle::dpiScale(25));
+	title->setFixedHeight(KStyle::dpiScale(35));
 
 	m_fontSize = QString("normalsize");
 	m_fontType = QString("");
